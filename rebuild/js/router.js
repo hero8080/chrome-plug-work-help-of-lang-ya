@@ -57,5 +57,5 @@ const routes = [
 
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
-    routes, // `routes: routes` 的缩写
+    routes
 })
