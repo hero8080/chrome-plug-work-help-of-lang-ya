@@ -1,0 +1,1 @@
+document.head.innerHTML='<title>欢迎使用狼牙科技日志插件</title>'

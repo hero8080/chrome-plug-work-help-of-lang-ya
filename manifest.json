@@ -1,0 +1,39 @@
+{
+	// 必须的字段
+	"name": "狼牙日志助手",
+	"version": "1.0.0",
+	"manifest_version": 2,
+
+	"browser_action": {
+		"default_icon": "icons/icon.png",
+		// 图标悬停时的标题，可选
+		"default_title": "欢迎使用狼牙科技日志插件"
+		 ,"default_popup": "popup.html"
+	},
+	"permissions": [
+		"tabs", "activeTab", "notifications", "background","http://os.cntytz.com/","https://os.cntytz.com/"
+	],
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"content_scripts": [{
+			"matches": ["https://os.cntytz.com/*"],
+			"css": ["rebuild/css/layout.css","rebuild/css/mystyle.css","rebuild/ele/index.css"],
+			"js": [
+				"rebuild/js/jsencrypt.min.js",
+				"rebuild/js/cache.js",
+				"rebuild/js/tool.js",
+
+				"rebuild/js/vue.global.js",
+				"rebuild/js/vue-router.js",
+				"rebuild/js/router.js",
+				"rebuild/ele/index.full.js",
+				"rebuild/js/request.js",
+				"rebuild/myscript.js"
+			],
+			"run_at": "document_end"
+		}
+	]
+
+}

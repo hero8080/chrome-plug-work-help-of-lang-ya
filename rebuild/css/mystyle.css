@@ -1,0 +1,98 @@
+.g_mar30bs > div:not(:last-child), .g_mar30bs > p:not(:last-child), .g_mar30bs > a:not(:last-child), .g_mar30b {
+    margin-bottom: 30px;
+}
+.g_mar20bs > div:not(:last-child), .g_mar20bs > p:not(:last-child), .g_mar20bs > a:not(:last-child), .g_mar20b {
+    margin-bottom: 20px;
+}
+.g_mar10bs > div:not(:last-child), .g_mar10bs > p:not(:last-child), .g_mar10bs > a:not(:last-child), .g_mar10b {
+    margin-bottom: 10px;
+}
+
+/* 内容区 */
+#app {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.left {
+    width: 90px;
+    border-right: 1px solid var(--border_color);
+}
+
+.left .point {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    opacity: 0;
+    border-radius: 6px;
+    transform: translateY(-50%) scale(0);
+}
+
+.left .icon_con {
+    padding-bottom: 50px;
+}
+
+.left .active_menu .point {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+.right .header{
+    padding-left: 60px;
+    border-bottom: 1px solid var(--border_color);
+}
+
+.right .header_img{
+    width: 60px;
+    height: 60px;
+    background-color: darkgray;
+    border:1px solid var(--border_color)
+}
+.right .content{
+    background-color: var(--bg_color);
+}
+
+/*加载中*/
+.spinner > div {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+}
+.spinner > div:not(:last-child){
+    margin-right: 5px;
+}
+.spinner .one {
+    -webkit-animation-delay: -.32s;
+    animation-delay: -.32s
+}
+
+.spinner .two {
+    -webkit-animation-delay: -.16s;
+    animation-delay: -.16s
+}
+
+@keyframes bouncedelay {
+
+    0%,
+    100%,
+    80% {
+        opacity: 0;
+        transform: scale(0);
+        -webkit-transform: scale(0)
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1);
+        -webkit-transform: scale(1)
+    }
+}
