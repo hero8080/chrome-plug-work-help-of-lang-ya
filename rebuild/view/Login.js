@@ -68,11 +68,11 @@ Login = {
                         欢迎登陆狼牙工作助手
                     </p>
                     <div class="input_item">
-                        <input class="bw100 g_pad12tb" v-model="form.userName" type="text" placeholder="账号">
+                        <input class="bw100 g_pad12tb" autocomplete="new-password" v-model="form.userName" type="text" placeholder="账号">
                         <i class="g_transition"></i>
                     </div>
                     <div class="g_mar20t  input_item">
-                        <input class="bw100 g_pad12tb" v-model="form.userpassword" type="password" placeholder="密码">
+                        <input class="bw100 g_pad12tb" autocomplete="new-password" v-model="form.userpassword" type="password" placeholder="密码">
                         <i class="g_transition"></i>
                     </div>
                     <div class="flex_center g_mar20t">
@@ -117,7 +117,7 @@ Login = {
         if(account){
             this.form=account
             //是否有用户名
-            if(userInfo.username){
+            if(userInfo&&userInfo.username){
                 this.isOneLogin=true
                 this.userInfo=userInfo
             }
