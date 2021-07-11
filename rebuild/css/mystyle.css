@@ -126,23 +126,30 @@
 .login .login_save_account .el-switch__core {
     background-color: transparent !important;
 }
-
 .login .login_save_account_checked .el-switch__core {
     background-color: #13ce66 !important;
 }
-
+/*占位符颜色设置*/
 .login .input_item input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color: #8089b7;
 }
-
 .login .input_item input:-moz-placeholder, textarea:-moz-placeholder {
     color: #8089b7;
 }
-
 .login .input_item input::-moz-placeholder, textarea::-moz-placeholder {
     color: #8089b7;
 }
-
 .login .input_item input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color: #8089b7;
+}
+
+/*写日志*/
+.write .write_content{
+    background-color: white;
+}
+.write .bottom{
+    padding-right: 10px;
+}
+.write .submit{
+    background-color: white;
 }

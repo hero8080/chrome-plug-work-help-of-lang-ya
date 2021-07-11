@@ -185,4 +185,79 @@ function getAccountList(param,loading,_this){
     return get('api/hrm/login/getAccountList',param,loading,_this)
 }
 
+//看日志模块
+//获取左边树
+function getLeftMenu(param,loading,_this){
+    param={
+        method: 'all',
+        offical:'',
+        officalType:' -1',
+        hideNoDataTab: false,
+        viewScope: 'done',
+        complete: 2,
+        date2during: 0,
+        menuIds: '1,90',
+        menuPathIds: '1,90',
+        actiontype: 'baseinfo'
+    }
+    return post('api/workflow/reqlist/doneBaseInfo',param,loading,_this)
+}
 
+//获取左边树的统计
+function getLeftMenuOfCount(param,loading,_this){
+    param={
+        method: 'all',
+        offical:'',
+        officalType:' -1',
+        hideNoDataTab: false,
+        viewScope: 'done',
+        complete: 2,
+        date2during: 0,
+        menuIds: '1,90',
+        menuPathIds: '1,90',
+        actiontype: 'countinfo'
+    }
+    return post('api/workflow/reqlist/doneCountInfo',param,loading,_this)
+}
+
+//获取请求数据的key
+function splitPageKey(param,loading,_this){
+    param={
+        method: 'all',
+        offical:'',
+        officalType: -1,
+        hideNoDataTab: false,
+        viewScope: 'done',
+        complete: 2,
+        date2during: 0,
+        viewcondition: 10,
+        defaultTabVal: 10,
+        menuIds: '1,90',
+        menuPathIds: '1,90',
+        loadDefTab: true,
+        actiontype: 'splitpage'
+    }
+    return post('api/workflow/reqlist/splitPageKey',param,loading,_this)
+}
+
+//获取日志列表
+function getViewList(param,loading,_this){
+    param={
+        dataKey: '',
+        current: 1,
+        sortParams: [],
+        ...param
+    }
+    return post('api/ec/dev/table/datas',param,loading,_this)
+}
+
+//获取日志详情
+function getViewInfo(param,loading,_this){
+    param={
+        preloadkey: 1625999828720,
+        requestid: 342625,
+        timestamp: 1625999828720,
+        ...param
+    }
+    return post('api/workflow/reqform/loadForm',param,loading,_this)
+}

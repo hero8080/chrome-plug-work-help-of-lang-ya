@@ -51,7 +51,7 @@ document.body.innerHTML = `
                         <p class="g_text2_color g_h14">{{userInfo.jobs}} | {{userInfo.deptname}}－{{userInfo.subcompanyname}}</p>
                     </div>
                 </div>
-                <div class="flex1 g_scroll_y content">
+                <div class="flex1 content">
                     <router-view></router-view>
                 </div>
             </div>
