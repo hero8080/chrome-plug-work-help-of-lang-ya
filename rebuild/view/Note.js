@@ -1,0 +1,1 @@
+Note = {template: '<div>Note.js</div>'}

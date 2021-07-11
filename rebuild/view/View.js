@@ -1,0 +1,1 @@
+View = {template: '<div>View.js</div>'}

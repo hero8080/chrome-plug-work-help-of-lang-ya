@@ -2,7 +2,7 @@
 let requests=[]
 
 //全局请求链接
-function xhr(isGetData,_this){
+function xhr(loading,_this){
     let baseApi='https://os.cntytz.com'
     let _requestUrl;
     this.setBaseApi=(apiUrl)=>{
@@ -41,13 +41,13 @@ function xhr(isGetData,_this){
             return
         }
         requests.push(sendUrl)
-        if(_this&&isGetData&&_this[isGetData]){
-            _this[isGetData]=false
+        if(_this&&loading){
+            _this[loading]=true
         }
         return new Promise((resolve,reject)=>{
             oxhr.addEventListener("error",   oEvent=> {
-                if(_this&&isGetData){
-                    _this[isGetData]=true
+                if(_this&&loading){
+                    _this[loading]=false
                 }
                 console.log('断网了')
                 console.log(oEvent)
@@ -55,8 +55,8 @@ function xhr(isGetData,_this){
                 reject(oEvent)
             });
             oxhr.addEventListener("abort",  oEvent=> {
-                if(_this&&isGetData){
-                    _this[isGetData]=true
+                if(_this&&loading){
+                    _this[loading]=false
                 }
                 console.log('取消了')
                 console.log(oEvent)
@@ -67,8 +67,8 @@ function xhr(isGetData,_this){
             oxhr.addEventListener("readystatechange",  oEvent=>{
                 if ( oxhr.readyState == 4 ) {
                     this.removeRequest(sendUrl)
-                    if(_this&&isGetData){
-                        _this[isGetData]=true
+                    if(_this&&loading){
+                        _this[loading]=false
                     }
                     if ( oxhr.status == 200 ) {
                         // console.log(oxhr.responseText)
@@ -76,9 +76,9 @@ function xhr(isGetData,_this){
                         if(result.errorCode=='002'){
                             _this.$message({
                                 message: result.msg,
-                                type: 'warning',
-                                duration:3000
+                                type: 'warning'
                             })
+                            _app.$router.replace('/login')
                         }
                         resolve(result)
                     } else {
@@ -89,8 +89,8 @@ function xhr(isGetData,_this){
                 }
             });
             oxhr.addEventListener("timeout",  oEvent=>{
-                if(_this&&isGetData){
-                    _this[isGetData]=true
+                if(_this&&loading){
+                    _this[loading]=false
                 }
                 console.log('timeout')
                 console.log(oEvent)
@@ -119,15 +119,15 @@ function xhr(isGetData,_this){
 }
 
 //get方法
-async function get(url,param,isGetData,_this,method='get'){
+async function get(url,param,loading,_this,method='get'){
     //判断又没有公钥
     if(!cache('pubRsaKey')){
         let pubRsaKey=await new xhr().get('rsa/weaver.rsa.GetRsaInfo')
         cache('pubRsaKey',JSON.stringify(pubRsaKey))
     }
     if(isString(param)){
-        _this=isGetData
-        isGetData=param
+        _this=loading
+        loading=param
         param= {}
     }
     if(url=='api/hrm/login/checkLogin'){
@@ -135,20 +135,20 @@ async function get(url,param,isGetData,_this,method='get'){
         param.userpassword = rsaDataEncrypt(param.userpassword)
     }
     if(method.toLowerCase()=='get'){
-        return new xhr(isGetData,_this).get(url,param)
+        return new xhr(loading,_this).get(url,param)
     }
     if(method.toLowerCase()=='post'){
-        return new xhr(isGetData,_this).post(url,param)
+        return new xhr(loading,_this).post(url,param)
     }
 }
 
 //post
-function post(url,param,isGetData,_this){
-   return get(url,param,isGetData,_this,'post')
+function post(url,param,loading,_this){
+   return get(url,param,loading,_this,'post')
 }
 
 //登录
-function  login(param,isGetData,_this){
+function  login(param,loading,_this){
     let _param={
         islanguid: 7,
         loginid: param.userName,
@@ -161,12 +161,12 @@ function  login(param,isGetData,_this){
         messages: '',
         isie: false,
     }
-    return post('api/hrm/login/checkLogin',_param,isGetData,_this)
+    return post('api/hrm/login/checkLogin',_param,loading,_this)
 }
 
 //获取账户
-function getAccountList(param,isGetData,_this){
-    return get('api/hrm/login/getAccountList',param,isGetData,_this)
+function getAccountList(param,loading,_this){
+    return get('api/hrm/login/getAccountList',param,loading,_this)
 }
 
 

@@ -1,0 +1,1 @@
+Write = {template: '<div>Write.js</div>'}

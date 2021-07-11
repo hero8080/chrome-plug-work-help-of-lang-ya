@@ -16,13 +16,11 @@
     left: 0;
     top: 0;
 }
-
-.left {
+.app_left {
     width: 90px;
     border-right: 1px solid var(--border_color);
 }
-
-.left .point {
+.app_left .point {
     position: absolute;
     right: -10px;
     top: 50%;
@@ -32,31 +30,32 @@
     border-radius: 6px;
     transform: translateY(-50%) scale(0);
 }
-
-.left .icon_con {
+.app_left .icon_con {
     padding-bottom: 50px;
 }
-
-.left .active_menu .point {
+.app_left .active_menu .point {
     opacity: 1;
     transform: translateY(-50%) scale(1);
 }
-.right .header{
+.app_right .header{
     padding-left: 60px;
     border-bottom: 1px solid var(--border_color);
 }
-
-.right .header_img{
+.app_right .header_img{
     width: 60px;
     height: 60px;
     background-color: darkgray;
     border:1px solid var(--border_color)
 }
-.right .content{
+.app_right .content{
     background-color: var(--bg_color);
 }
 
 /*加载中*/
+.spinner{
+    width: 64px;
+    margin: auto;
+}
 .spinner > div {
     display: inline-block;
     width: 18px;
@@ -74,14 +73,11 @@
     -webkit-animation-delay: -.32s;
     animation-delay: -.32s
 }
-
 .spinner .two {
     -webkit-animation-delay: -.16s;
     animation-delay: -.16s
 }
-
 @keyframes bouncedelay {
-
     0%,
     100%,
     80% {
@@ -89,10 +85,64 @@
         transform: scale(0);
         -webkit-transform: scale(0)
     }
-
     40% {
         opacity: 1;
         transform: scale(1);
         -webkit-transform: scale(1)
     }
+}
+
+/*登录*/
+.login .login_con{
+    width: 1200px;
+    padding: 50px 0;
+    background-color: rgba(207,174,255,0.1);
+    border-radius: 20px;
+}
+.login{
+    background-color: #071440;
+}
+.login .form{
+    padding: 0 140px;
+}
+.login .input_item input{
+    color: white;
+    background-color: transparent;
+    /*background-color: #131c4a;*/
+    border-bottom: 1px solid #303967;
+}
+.login .input_item input+ i {
+    width: 0;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+}
+.login .input_item input:focus+ i {
+    width: 100%;
+    background-color: white;
+}
+.login .login_save_account .el-switch__core {
+    background-color: transparent !important;
+}
+
+.login .login_save_account_checked .el-switch__core {
+    background-color: #13ce66 !important;
+}
+
+.login .input_item input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #8089b7;
+}
+
+.login .input_item input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #8089b7;
+}
+
+.login .input_item input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #8089b7;
+}
+
+.login .input_item input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #8089b7;
 }

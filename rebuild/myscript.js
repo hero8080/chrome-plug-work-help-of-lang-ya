@@ -21,7 +21,7 @@ document.body.innerHTML = `
 		    <router-view></router-view>
         </template>
         <template v-else>
-		    <div class='flex_column left'>
+		    <div class='flex_column app_left'>
                 <div class="flex1 flex_column_center g_mar30bs icon_con">
                     <template v-for="(item,index) in routes">
                         <router-link :to="item.path" class="g_pointer" v-if="item.showHome"  @click="activeMenu=index" :class="{active_menu:index==activeMenu}">
@@ -41,7 +41,7 @@ document.body.innerHTML = `
                     </svg>
                 </div>
             </div>
-            <div class='flex1 flex_column right'>
+            <div class='flex1 flex_column app_right'>
                 <div class="flex_center g_pad16tb header" v-if="userInfo">
                     <div class="g_img g_radius_all header_img">
                         <img :src="userInfo.icon" alt="">
@@ -61,7 +61,7 @@ document.body.innerHTML = `
 const vueApp = {
     data() {
         return {
-            isLogin:location.pathname.search(/\/login/)!==-1,
+            isLogin:false,
             activeMenu:(()=>{
                 let allRoutePath=routes.map(item=>item.path)
                 let routeIndex=allRoutePath.indexOf(location.pathname)
@@ -78,6 +78,11 @@ const vueApp = {
             isGetData:false,
             userInfo:{},
             routes:routes
+        }
+    },
+    watch:{
+        $route(value){
+            this.isLogin=value.path.search(/\/login/i)!==-1
         }
     },
     created(){
@@ -200,7 +205,7 @@ app.use(ElementPlus);
 app.use(router);
 
 //挂载app
-app.mount('#app')
+let _app = app.mount('#app')
 
 
 

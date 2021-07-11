@@ -21,15 +21,28 @@
 			"matches": ["https://os.cntytz.com/*"],
 			"css": ["rebuild/css/layout.css","rebuild/css/mystyle.css","rebuild/ele/index.css"],
 			"js": [
+				//加密解密
 				"rebuild/js/jsencrypt.min.js",
+				//缓存插件
 				"rebuild/js/cache.js",
+				//工具箱
 				"rebuild/js/tool.js",
 
+				//vue插件
 				"rebuild/js/vue.global.js",
 				"rebuild/js/vue-router.js",
-				"rebuild/js/router.js",
+				//页面
+				"rebuild/view/Login.js",
+				"rebuild/view/Note.js",
+				"rebuild/view/View.js",
+				"rebuild/view/Write.js",
+				//路由
+				"rebuild/view/router.js",
+				//element插件
 				"rebuild/ele/index.full.js",
+				//数据请求
 				"rebuild/js/request.js",
+				//主脚本
 				"rebuild/myscript.js"
 			],
 			"run_at": "document_end"

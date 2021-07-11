@@ -1,7 +1,7 @@
-const Note = {template: '<div>Note</div>'}
+/*const Note = {template: '<div>Note</div>'}
 const View = {template: '<div>View</div>'}
 const Write = {template: '<div>Write</div>'}
-const Login = {template: '<div>Login</div>'}
+const Login = {template: '<div>Login</div>'}*/
 
 const routes = [
     {
