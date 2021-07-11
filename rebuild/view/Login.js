@@ -48,7 +48,7 @@ Login = {
                     </div>
                     <p class="text_center g_mar20t g_text2_color">{{userInfo.username}}</p>
                 </template>
-                <template>
+                <template v-else>
                     <div class="g_img g_wid50_ah block_center">
                        <svg 
                          xmlns="http://www.w3.org/2000/svg"

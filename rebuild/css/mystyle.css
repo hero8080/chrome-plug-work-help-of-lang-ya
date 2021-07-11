@@ -18,7 +18,7 @@
 }
 .app_left {
     width: 90px;
-    border-right: 1px solid var(--border_color);
+    border-right: 1px solid var(--bg_color);
 }
 .app_left .point {
     position: absolute;
@@ -39,7 +39,7 @@
 }
 .app_right .header{
     padding-left: 60px;
-    border-bottom: 1px solid var(--border_color);
+    border-bottom: 1px solid var(--bg_color);
 }
 .app_right .header_img{
     width: 60px;
@@ -49,6 +49,32 @@
 }
 .app_right .content{
     background-color: var(--bg_color);
+    padding: 15px 0 16px;
+    overflow-y: scroll;
+}
+
+/*viewContent*/
+.view_content{
+    background-color: white;
+    width: calc(100% - 25px);
+    margin-left: 15px;
+    min-height: 100%;
+}
+.empty_content_box{
+    padding-top: 15px;
+    background-color: var(--bg_color);
+    overflow-y: scroll;
+}
+.empty_content_bottom{
+    background-color: white;
+    width: calc(100% - 31px);
+    margin-left: 15px;
+}
+.empty_content{
+    background-color: white;
+    width: calc(100% - 25px);
+    margin-left: 15px;
+    min-height: 100%;
 }
 
 /*加载中*/
@@ -144,12 +170,4 @@
 }
 
 /*写日志*/
-.write .write_content{
-    background-color: white;
-}
-.write .bottom{
-    padding-right: 10px;
-}
-.write .submit{
-    background-color: white;
-}
+
