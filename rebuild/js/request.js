@@ -74,11 +74,27 @@ function xhr(loading,_this){
                         // console.log(oxhr.responseText)
                         let result=JSON.parse(oxhr.responseText)
                         if(result.errorCode=='002'){
-                            _this.$message({
-                                message: result.msg,
-                                type: 'warning'
-                            })
-                            _app.$router.replace('/login')
+                            //判断是否可以自动登录
+                            let saveAccount=cache('saveAccount')
+                            let account=cache('account')
+                            if(account&&saveAccount){
+                                _app.$message({
+                                    message: '正在为您自动登录...'
+                                })
+                                login(account).then(res=>{
+                                    _app.$message({
+                                        message: '登录成功'
+                                    })
+                                    _app.init()
+                                })
+                            }else{
+                                //跳转至登录页面
+                                _this.$message({
+                                    message: result.msg,
+                                    type: 'warning'
+                                })
+                                _app.$router.replace('/login')
+                            }
                         }
                         resolve(result)
                     } else {

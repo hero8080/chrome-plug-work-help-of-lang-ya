@@ -40,36 +40,47 @@ Login = {
         </div>
         <div class="flex1 flex_content_center login_right">
             <div class="bw100 form">
-                <div class="g_img g_wid50_ah block_center">
-                   <svg 
-                     xmlns="http://www.w3.org/2000/svg"
-                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                     width="50px" height="50px">
-                    <path fill-rule="evenodd"  fill="rgb(214, 200, 255)"
-                     d="M38.000,12.000 L45.000,12.000 C47.761,12.000 50.000,14.239 50.000,17.000 L50.000,45.000 C50.000,47.761 47.761,50.000 45.000,50.000 L38.000,50.000 L38.000,12.000 Z"/>
-                    <path fill-rule="evenodd"  fill="rgb(149, 123, 255)"
-                     d="M5.000,0.000 L33.000,0.000 C35.761,0.000 38.000,2.239 38.000,5.000 L38.000,50.000 L5.000,50.000 C2.239,50.000 -0.000,47.761 -0.000,45.000 L-0.000,5.000 C-0.000,2.239 2.239,0.000 5.000,0.000 Z"/>
-                    <path fill-rule="evenodd"  fill="rgb(237, 231, 255)"
-                     d="M12.000,15.000 L26.000,15.000 C27.657,15.000 29.000,16.343 29.000,18.000 C29.000,19.657 27.657,21.000 26.000,21.000 L12.000,21.000 C10.343,21.000 9.000,19.657 9.000,18.000 C9.000,16.343 10.343,15.000 12.000,15.000 Z"/>
-                    <path fill-rule="evenodd"  fill="rgb(237, 231, 255)"
-                     d="M12.000,28.000 L26.000,28.000 C27.657,28.000 29.000,29.343 29.000,31.000 C29.000,32.657 27.657,34.000 26.000,34.000 L12.000,34.000 C10.343,34.000 9.000,32.657 9.000,31.000 C9.000,29.343 10.343,28.000 12.000,28.000 Z"/>
-                    </svg>
-                </div>
-                <p class="g_h18 g_desc_color text_center g_pad20t g_mar40b">
-                    欢迎登陆狼牙工作助手
-                </p>
-                <div class="input_item">
-                    <input class="bw100 g_pad12tb" v-model="form.userName" type="text" placeholder="账号">
-                    <i class="g_transition"></i>
-                </div>
-                <div class="g_mar20t  input_item">
-                    <input class="bw100 g_pad12tb" v-model="form.userpassword" type="text" placeholder="密码">
-                    <i class="g_transition"></i>
-                </div>
-                <div class="flex_center g_mar20t">
-                   <p class="flex1 g_desc_color g_h14">自动登录</p>
-                   <el-switch class="login_save_account" :class="{login_save_account_checked:saveAccount}" v-model="saveAccount" active-color="#13ce66" inactive-color="#e5e5e5"></el-switch>
-                </div>
+                
+                <template v-if="isOneLogin">
+                    <!--一键登录-->
+                    <div class="g_img block_center g_wid80_ah g_radius_all">
+                        <img :src="userInfo.icon" alt="">
+                    </div>
+                    <p class="text_center g_mar20t g_text2_color">{{userInfo.username}}</p>
+                </template>
+                <template>
+                    <div class="g_img g_wid50_ah block_center">
+                       <svg 
+                         xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                         width="50px" height="50px">
+                        <path fill-rule="evenodd"  fill="rgb(214, 200, 255)"
+                         d="M38.000,12.000 L45.000,12.000 C47.761,12.000 50.000,14.239 50.000,17.000 L50.000,45.000 C50.000,47.761 47.761,50.000 45.000,50.000 L38.000,50.000 L38.000,12.000 Z"/>
+                        <path fill-rule="evenodd"  fill="rgb(149, 123, 255)"
+                         d="M5.000,0.000 L33.000,0.000 C35.761,0.000 38.000,2.239 38.000,5.000 L38.000,50.000 L5.000,50.000 C2.239,50.000 -0.000,47.761 -0.000,45.000 L-0.000,5.000 C-0.000,2.239 2.239,0.000 5.000,0.000 Z"/>
+                        <path fill-rule="evenodd"  fill="rgb(237, 231, 255)"
+                         d="M12.000,15.000 L26.000,15.000 C27.657,15.000 29.000,16.343 29.000,18.000 C29.000,19.657 27.657,21.000 26.000,21.000 L12.000,21.000 C10.343,21.000 9.000,19.657 9.000,18.000 C9.000,16.343 10.343,15.000 12.000,15.000 Z"/>
+                        <path fill-rule="evenodd"  fill="rgb(237, 231, 255)"
+                         d="M12.000,28.000 L26.000,28.000 C27.657,28.000 29.000,29.343 29.000,31.000 C29.000,32.657 27.657,34.000 26.000,34.000 L12.000,34.000 C10.343,34.000 9.000,32.657 9.000,31.000 C9.000,29.343 10.343,28.000 12.000,28.000 Z"/>
+                        </svg>
+                    </div>
+                    <p class="g_h18 g_desc_color text_center g_pad20t g_mar40b">
+                        欢迎登陆狼牙工作助手
+                    </p>
+                    <div class="input_item">
+                        <input class="bw100 g_pad12tb" v-model="form.userName" type="text" placeholder="账号">
+                        <i class="g_transition"></i>
+                    </div>
+                    <div class="g_mar20t  input_item">
+                        <input class="bw100 g_pad12tb" v-model="form.userpassword" type="password" placeholder="密码">
+                        <i class="g_transition"></i>
+                    </div>
+                    <div class="flex_center g_mar20t">
+                       <p class="flex1 g_desc_color g_h14">自动登录</p>
+                       <el-switch class="login_save_account" :class="{login_save_account_checked:saveAccount}" v-model="saveAccount" active-color="#13ce66" inactive-color="#e5e5e5"></el-switch>
+                    </div>
+                </template>
+                
                 <div class="block_center g_wid50_ah g_mar60t" @click="login">
                     <loading v-if="loading"></loading>
                     <svg 
@@ -95,8 +106,23 @@ Login = {
                 userpassword:""
             },
             saveAccount:false,
-            loading:false
+            loading:false,
+            isOneLogin:false,
+            userInfo:{}
         };
+    },
+    created(){
+        let account=cache('account')
+        let userInfo=cache('userInfo')
+        if(account){
+            this.form=account
+            //是否有用户名
+            if(userInfo.username){
+                this.isOneLogin=true
+                this.userInfo=userInfo
+            }
+
+        }
     },
     methods:{
         login(){
@@ -111,7 +137,17 @@ Login = {
             }
 
             login(this.form,'loading',this).then(res=>{
-                console.log(res.msg)
+                if(this.saveAccount){
+                    cache('saveAccount',this.saveAccount)
+                }
+                if(res.msgcode==0){
+                    //登录成功
+                    //保存用户名和密码
+                    cache('account',JSON.stringify(this.form))
+                    this.$root.init()
+                    this.$router.replace('/')
+
+                }
                 this.$message(res.msg)
             })
         }

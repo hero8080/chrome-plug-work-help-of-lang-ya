@@ -95,6 +95,7 @@ const vueApp = {
             })*/
             getAccountList('isGetData',this).then(res=>{
                 this.userInfo=res.data
+                cache('userInfo',JSON.stringify(this.userInfo))
             }).catch(error=>{
                 console.log(error)
             })
