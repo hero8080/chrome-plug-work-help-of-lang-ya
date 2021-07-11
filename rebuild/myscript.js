@@ -47,7 +47,7 @@ document.body.innerHTML = `
                         <img :src="userInfo.icon" alt="">
                     </div>
                     <div class="g_pad12l">
-                        <p class="g_text_color g_h21 g_mar8b">早安，{{userInfo.username}}，祝你开心每一天</p>
+                        <p class="g_text_color g_h21 g_mar8b">{{welcome}}，{{userInfo.username}}，祝你开心每一天</p>
                         <p class="g_text2_color g_h14">{{userInfo.jobs}} | {{userInfo.deptname}}－{{userInfo.subcompanyname}}</p>
                     </div>
                 </div>
@@ -75,7 +75,25 @@ const vueApp = {
             },
             isGetData:false,
             userInfo:{},
-            routes:routes
+            routes:routes,
+            welcome:(()=>{
+                let currentHours = new Date().getHours()
+                let tips=[
+                    [0,7,'深夜加班注意休息哦'],
+                    [7,10,'早安'],
+                    [10,13,'午安'],
+                    [13,18,'下午好'],
+                    [18,21,'晚上加班辛苦了'],
+                    [21,23,'深夜加班辛苦了']
+                ]
+                let msg=''
+                tips.map(item=>{
+                    if(item[0]<=currentHours&&currentHours<item[1]){
+                        msg=item[2]
+                    }
+                })
+                return msg
+            })()
         }
     },
     watch:{
