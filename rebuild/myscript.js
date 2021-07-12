@@ -88,7 +88,7 @@ const vueApp = {
                 ]
                 let msg=''
                 tips.map(item=>{
-                    if(item[0]<=currentHours&&currentHours<item[1]){
+                    if(item[0]<currentHours&&currentHours<=item[1]){
                         msg=item[2]
                     }
                 })
@@ -112,6 +112,9 @@ const vueApp = {
             getAccountList('isGetData',this).then(res=>{
                 this.userInfo=res.data
                 cache('userInfo',JSON.stringify(this.userInfo))
+                getUserInfo(res.data.userid).then(userInfo=>{
+                    console.log(userInfo)
+                })
             }).catch(error=>{
                 console.log(error)
             })

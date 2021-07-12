@@ -1,6 +1,5 @@
 //全局缓存的请求
 let requests=[]
-
 //全局请求链接
 function xhr(loading,_this){
     let baseApi='https://os.cntytz.com'
@@ -120,20 +119,31 @@ function xhr(loading,_this){
             getUrl=getUrl.join('&').replace(/%20/g,'+')
 
             console.log(sendUrl)
-            oxhr.open(method,sendUrl);
+
             if (method.toLowerCase() == 'get') {
+                oxhr.open(method,sendUrl+'?'+getUrl);
                 oxhr.send();
             } else {
+                oxhr.open(method,sendUrl);
                 oxhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
                 // oxhr.setRequestHeader('content-type', 'application/json');
                 console.log(sendUrl)
                 console.log(getUrl)
-                oxhr.send(getUrl);
+                if(_param.type=='file'){
+                    let formData=new FormData
+                    delete _param.type
+                    for(let key in _param){
+                        formData.append(key,_param[key])
+                    }
+                    oxhr.send(formData);
+                }else{
+                    oxhr.send(getUrl);
+                }
+
             }
         })
     }
 }
-
 //get方法
 async function get(url,param,loading,_this,method='get'){
     //判断又没有公钥
@@ -157,12 +167,10 @@ async function get(url,param,loading,_this,method='get'){
         return new xhr(loading,_this).post(url,param)
     }
 }
-
 //post
 function post(url,param,loading,_this){
    return get(url,param,loading,_this,'post')
 }
-
 //登录
 function  login(param,loading,_this){
     let _param={
@@ -179,11 +187,29 @@ function  login(param,loading,_this){
     }
     return post('api/hrm/login/checkLogin',_param,loading,_this)
 }
-
 //获取账户
 function getAccountList(param,loading,_this){
     return get('api/hrm/login/getAccountList',param,loading,_this)
 }
+//获取个人信息
+function getUserInfo(userId,loading,_this){
+    let param={
+        operation: 'getResourceBaseView',
+        id: userId
+    }
+    return get('api/hrm/resource/getResourceCard',param,loading,_this)
+}
+//上传头像
+function getUserInfo(param,loading,_this){
+    param={
+        name: '头像',
+        secretLevel: '',
+        ...param,
+        type:"file"
+    }
+    return post('api/doc/upload/uploadFile',param,loading,_this)
+}
+
 
 //看日志模块
 //获取左边树
@@ -202,7 +228,6 @@ function getLeftMenu(param,loading,_this){
     }
     return post('api/workflow/reqlist/doneBaseInfo',param,loading,_this)
 }
-
 //获取左边树的统计
 function getLeftMenuOfCount(param,loading,_this){
     param={
@@ -219,7 +244,14 @@ function getLeftMenuOfCount(param,loading,_this){
     }
     return post('api/workflow/reqlist/doneCountInfo',param,loading,_this)
 }
-
+//获取日志总量
+function getWriteCount(dataKey,loading,_this){
+    return post('api/ec/dev/table/counts', {dataKey:dataKey},loading,_this)
+}
+//设置分页
+function setPageSize(param,loading,_this){
+    return post('api/ec/dev/table/pageSize', param,loading,_this)
+}
 //获取请求数据的key
 function splitPageKey(param,loading,_this){
     param={
@@ -239,7 +271,6 @@ function splitPageKey(param,loading,_this){
     }
     return post('api/workflow/reqlist/splitPageKey',param,loading,_this)
 }
-
 //获取日志列表
 function getViewList(param,loading,_this){
     param={
@@ -250,7 +281,6 @@ function getViewList(param,loading,_this){
     }
     return post('api/ec/dev/table/datas',param,loading,_this)
 }
-
 //获取日志详情
 function getViewInfo(param,loading,_this){
     param={
