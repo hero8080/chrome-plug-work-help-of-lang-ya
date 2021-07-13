@@ -30,6 +30,7 @@
 
 				//vue插件
 				"rebuild/js/vue.global.js",
+				"rebuild/js/vuex.global.js",
 				"rebuild/js/vue-router.js",
 				//页面
 				"rebuild/view/Login.js",

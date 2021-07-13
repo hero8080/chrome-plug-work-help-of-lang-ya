@@ -14,6 +14,25 @@ function resetHead() {
 }
 resetHead()
 
+// 创建一个新的 store 实例
+const store = Vuex.createStore({
+    state () {
+        return {
+            _userInfo: false,
+            _leftMenuTree: false,
+            _isGetData:false
+        }
+    },
+    mutations: {
+        setData(state,obj) {
+            for(let key in obj){
+                state[key] = obj[key]
+            }
+        }
+    }
+})
+
+
 //vue模板
 document.body.innerHTML = `
 	<div id='app' class='flex'>
@@ -93,7 +112,8 @@ const vueApp = {
                     }
                 })
                 return msg
-            })()
+            })(),
+            //数据加载状态
         }
     },
     watch:{
@@ -106,18 +126,40 @@ const vueApp = {
     },
     methods:{
         init(){
+            let loadStatus=0
+            let userInfo={}
+            let leftMenuTree={}
+            let dealResult=()=>{
+                if(loadStatus==2){
+                    store.commit('setData',{
+                        _userInfo:userInfo,
+                        _leftMenuTree:leftMenuTree,
+                        _isGetData:true
+                    })
+                }
+            }
             /*login({userName:'zhouzhangfeng',userpassword:'zzf808080'},'isGetData',this).then(res=>{
                 console.log(res)
             })*/
             getAccountList('isGetData',this).then(res=>{
                 this.userInfo=res.data
                 cache('userInfo',JSON.stringify(this.userInfo))
-                getUserInfo(res.data.userid).then(userInfo=>{
+                /*getUserInfo(res.data.userid).then(userInfo=>{
                     console.log(userInfo)
-                })
+                })*/
+                userInfo=res.data
+                loadStatus+=1
+                dealResult()
             }).catch(error=>{
                 console.log(error)
             })
+            getLeftMenu().then(res=>{
+                cache('leftMenuTree',JSON.stringify(res.treedata))
+                leftMenuTree=res.treedata
+                loadStatus+=1
+                dealResult()
+            })
+
            /* if(checkLogin()){
                 login({userName:'zhouzhangfeng',userpassword:'zzf808080'},'isGetData',this).then(res=>{
                     console.log(res)
@@ -223,6 +265,8 @@ app.use(ElementPlus);
 
 //注冊路由
 app.use(router);
+app.use(store);
 
 //挂载app
 let _app = app.mount('#app')
+
