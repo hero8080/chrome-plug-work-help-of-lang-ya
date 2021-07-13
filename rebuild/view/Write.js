@@ -45,6 +45,8 @@ Write = {
                     f_weaver_belongto_userid: this._userInfo.userid,
                     wfCreater: this._userInfo.userid,
                     current: current,
+                    min: (current-1)*10+1,
+                    max: current*10,
                 }).then(res=>{
                     times++
                     if(!columns){
@@ -65,6 +67,7 @@ Write = {
                             return parseInt(b.id)-parseInt(a.id)
                         })
                         console.log(this.projectList)
+                        // write()
                     }
                 })
             }
