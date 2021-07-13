@@ -211,6 +211,12 @@ function getUserInfo(param,loading,_this){
 }
 
 
+//写日志
+function write(param,loading,_this){
+    return post('/api/workflow/reqform/requestOperation',param,loading,_this)
+}
+
+
 //看日志模块
 //获取左边树
 function getLeftMenu(param,loading,_this){

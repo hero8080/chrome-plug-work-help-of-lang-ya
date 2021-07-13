@@ -13,9 +13,9 @@ View = {
                           >
                         </el-table-column>
                     </el-table>
-                    <div class="text_right g_pad8tb flex_center flex_right" v-if="page.count>0">
-                        <span>共{{page.count}}条数据</span>
-                        <el-pagination   @current-change="getList" :page-size="page.pageSize" v-model:currentPage="page.pageNum" background layout="prev, pager, next" :total="page.count"></el-pagination>
+                    <div class="text_right g_pad8tb flex_center flex_right el_pagination" v-if="page.count>0">
+                        <span class="g_h14 g_text2_color">共{{page.count}}条数据</span>
+                        <el-pagination @current-change="getList" :page-size="page.pageSize" v-model:currentPage="page.pageNum" background layout="prev, pager, next" :total="page.count"></el-pagination>
                     </div>
                 </div>
             </div>   
@@ -73,6 +73,7 @@ View = {
         },
         getList(){
             let dataKey=this.dataKey
+            this.loading=true
             getViewList({dataKey:dataKey,current:this.page.pageNum}).then(listData=>{
                 this.loading=false
                 this.tableData=listData.datas

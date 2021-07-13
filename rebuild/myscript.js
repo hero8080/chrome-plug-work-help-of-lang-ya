@@ -88,7 +88,7 @@ const vueApp = {
                 ]
                 let msg=''
                 tips.map(item=>{
-                    if(item[0]<currentHours&&currentHours<=item[1]){
+                    if(item[0]<=currentHours&&currentHours<=item[1]){
                         msg=item[2]
                     }
                 })
@@ -226,34 +226,3 @@ app.use(router);
 
 //挂载app
 let _app = app.mount('#app')
-
-
-
-
-
-
-
-
-
-
-
-
-
-let param = {
-    islanguid: 7,
-    loginid: 'gBYXmbCCeh/7I3NNTnbCMHWBWNHNdnN1aJexoX3ccl6dD8dbwXOvZCh+zw8PNz4NIt58z97kazvBwH6su6fx3qiYBMKqFHLqi3clFMUypUl3Mz8Ymx9bdQHjiIor6EuehLVujJjvc7uxM4DqptE5+wFeNnyF3AnUZROnRJae4iEv0V1QxbWE3OtCBzGtwtSDOf4bSj+Pf1s/G1k9GjBL3E5IVWH9Y3+71H1FkDsnPh87nv8wZ91Q/YLJC/DyuF94gwgdP5JNjdAnJHNtFhQ4XWQWqwyOuVd3plTjmZHFzf3CN+YpdwzatX6ksyEfiJNEv6O/2LySFPkc2yhdTlAxlQ==``RSA``',
-    userpassword: 'EEZaYbup56vkWqqJx/5eJqgTQtWOg9FH6V96MiKsrtrSnYZqStB5MsOCWFgdAVe7WXrhB9YE40mYmZ1jepmgTIPzS4486pm08nMFMkJUhWjR8Ew8/h9f0MsA1Hckfr69VMY7GPsCg/tdlk9/3aKTl7o7W7hY0oHy7ZLqOqhgrbBY0YwhyOEGReuWukZbawbYGcR0wQ3W7WJJnofgXOgWBmMIpzncLC9a1OT5uxwkSt3WvN8sU71H7A/lOft2zTI39HWymqVu5FfnH34qhAzAhdnZKyTVV9J5PGECvIonNPjpzaCBlIbqqWDJYkjQ9b2C4gbrYkmbjOxv+Bjc42x0gA==``RSA``',
-    dynamicPassword: '',
-    tokenAuthKey: '',
-    validatecode: '',
-    validateCodeKey: '',
-    logintype: 1,
-    messages: '',
-    isie: false,
-}
-
-function apendHtml(html) {
-    let div = document.createElement('div')
-    div.innerHTML = html
-    document.body.appendChild(div)
-}
