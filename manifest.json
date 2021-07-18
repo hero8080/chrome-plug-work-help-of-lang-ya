@@ -19,7 +19,7 @@
 	},
 	"content_scripts": [{
 			"matches": ["https://os.cntytz.com/*"],
-			"css": ["rebuild/css/layout.css","rebuild/css/mystyle.css","rebuild/ele/index.css"],
+			"css": ["rebuild/ele/index.css","rebuild/css/layout.css","rebuild/css/mystyle.css"],
 			"js": [
 				//加密解密
 				"rebuild/js/jsencrypt.min.js",

@@ -1,21 +1,43 @@
 Write = {
     template: `
-        <div class="flex1">
-            <div class="flex_column stretch100 g_bg_bgcolor">
-                <div class="flex1 g_scroll_y empty_content_box">
-                    <div class="empty_content">
-                        <div v-for="item in 100">{{item}}</div>
-                    </div>
+        <div class="flex1 flex_column write">
+            <div class="empty_height"></div>
+            <div class="empty_content_bottom g_pad40t g_pad12b g_h24 g_pad60l bold">写日志</div> 
+            <div class="middle">
+                <div class="g_pad20tb content">
+                    <el-form class="form" :rules="rules" label-position="top" :model="form" ref="form">
+                      <el-form-item label="名称" prop="name">
+                        <el-input v-model="form.name"></el-input>
+                      </el-form-item>
+                      <el-form-item label="活动区域">
+                        <el-input v-model="form.desc"></el-input>
+                      </el-form-item>
+                      <el-form-item label="活动形式">
+                        <el-input v-model="form.name"></el-input>
+                      </el-form-item>
+                    </el-form>
                 </div>
-                <div class="empty_content_bottom">
-                    <div>提交日志</div>
-                </div>
-            </div>  
-        </div>
+            </div> 
+            <div class="flex1 empty_content_bottom g_pad32t g_pad28bt g_pad60l">
+                <el-button class="el_btn_beautiful" type="success" @click="submitForm">成功按钮</el-button>
+                <el-button class="el_btn_beautiful el_btn_beautiful_cancel" plain>朴素按钮</el-button>
+            </div> 
+            <div class="empty_height_bottom"></div>
+        </div> 
     `,
     data(){
         return {
-            projectList:[]
+            projectList:[],
+            form:{
+                name:'',
+                desc:'',
+            },
+            rules: {
+                name: [
+                    { required: true, message: '请输入活动名称', trigger: 'blur' },
+                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ],
+            }
         };
     },
     computed:{
@@ -38,7 +60,6 @@ Write = {
             let pageTotal=0
             let times=0
             let getListData=(isFirst=true,current=1)=>{
-
                 getProject({
                     workflowid: this._leftMenuTree[0].childs[0].key,
                     wfid: this._leftMenuTree[0].childs[0].key,
@@ -72,6 +93,16 @@ Write = {
                 })
             }
             getListData()
-        }
+        },
+        submitForm() {
+            this.$refs.form.validate((valid) => {
+                if (valid) {
+                    alert('submit!');
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
     }
 }

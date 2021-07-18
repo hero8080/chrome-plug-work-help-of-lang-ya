@@ -61,7 +61,6 @@
     min-height: 100%;
 }
 .empty_content_box{
-    padding-top: 15px;
     background-color: var(--bg_color);
     overflow-y: scroll;
 }
@@ -155,6 +154,7 @@
 .login .login_save_account_checked .el-switch__core {
     background-color: #13ce66 !important;
 }
+
 /*占位符颜色设置*/
 .login .input_item input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color: #8089b7;
@@ -169,12 +169,88 @@
     color: #8089b7;
 }
 
-/*写日志*/
-
+/*ele重置*/
 table {
     font-size: 14px;
     color: #606266;
 }
 .el_pagination{
     margin-right: -10px;
+}
+.el_btn_beautiful{
+    padding: 9px 20px;
+    min-width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 14px;
+    height: initial;
+    border: none;
+    background-color: #fe2c55;
+    margin-right: 0;
+}
+.el_btn_beautiful_cancel{
+    color: #6b7075;
+    background-color: #f4f5f5;
+}
+.el_btn_beautiful +.el_btn_beautiful{
+    margin-left: 20px;
+}
+.el-form-item__label{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #404346;
+    margin: 20px 0 6px;
+}
+.el-input__inner {
+    height: 32px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    background-color: #f4f5f5;
+    padding: 0 10px;
+}
+.el-form-item{
+    margin-bottom: 0;
+}
+.el-input__inner:hover {
+    border-color: #7cb8ff;
+}
+.el-input.is-active .el-input__inner, .el-input__inner:focus {
+    border-color: #0058ff;
+}
+.el-form--label-top .el-form-item__label {
+    padding: 0;
+}
+.el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label::before {
+    display: none;
+}
+.el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label::after {
+    content: '*';
+    color: red;
+    margin-left: 4px;
+}
+
+/*写日志*/
+.write{
+    background-color: var(--bg_color);
+}
+.write .empty_height{
+    height: 15px;
+}
+.write .empty_height_bottom{
+    height: 16px;
+}
+.write .middle{
+    overflow-y: scroll;
+    max-height: calc(100vh - 93px - 16px - 16px - 16px - 16px);
+}
+.write .content{
+    background-color: white;
+    width: calc(100% - 25px);
+    margin-left: 15px;
+    padding: 0;
+}
+.form{
+    width: 600px;
+    padding: 0 60px;
 }

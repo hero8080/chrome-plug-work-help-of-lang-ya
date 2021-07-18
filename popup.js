@@ -3,4 +3,6 @@ if(localStorage.getItem('hello')){
 }else{
 	localStorage.setItem('hello','hello')
 }
-document.getElementById('box').innerHTML=localStorage.getItem('hello')
+try{
+	document.getElementById('box').innerHTML=localStorage.getItem('hello')
+}catch (e){}
