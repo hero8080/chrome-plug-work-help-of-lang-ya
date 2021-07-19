@@ -6,16 +6,22 @@ Write = {
             <div class="middle">
                 <div class="g_pad20tb content">
                     <el-form class="form" :rules="rules" label-position="top" :model="form" ref="form">
-                      <el-form-item label="名称" prop="name">
-                        <el-input v-model="form.name"></el-input>
+                      <el-form-item label="日报名称" prop="requestname">
+                        <el-input v-model="form.requestname" placeholder="请输入日报名称"></el-input>
                       </el-form-item>
-                      <el-form-item label="活动区域">
-                        <el-input v-model="form.desc"></el-input>
+                      <el-form-item label="日报日期" prop="field7673">
+                        <el-input v-model="form.field7673" placeholder="请输入日报日期"></el-input>
                       </el-form-item>
-                      <el-form-item label="活动形式">
-                        <el-input v-model="form.name"></el-input>
-                      </el-form-item>
+                      <div class="g_h18 bold g_mar20t g_pad12b form_fieldset">今日工作</div>
+                      <div>
+                      今日工作
+                      </div>
+                      <div class="g_h18 bold g_mar20t g_pad12b form_fieldset">明日计划</div>
+                      <div>
+                      明日计划
+                      </div>
                     </el-form>
+                    <div class="g_wid20_h"></div>
                 </div>
             </div> 
             <div class="flex1 empty_content_bottom g_pad32t g_pad28bt g_pad60l">
@@ -29,13 +35,15 @@ Write = {
         return {
             projectList:[],
             form:{
-                name:'',
-                desc:'',
+                requestname:'工作日报与计划-周章锋-2021-07-16',
+                field7673:'2021-07-16',
             },
             rules: {
-                name: [
-                    { required: true, message: '请输入活动名称', trigger: 'blur' },
-                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                requestname: [
+                    { required: true, message: '请输入日报名称', trigger: 'blur' }
+                ],
+                field7673: [
+                    { required: true, message: '请输入日报日期', trigger: 'blur' }
                 ],
             }
         };

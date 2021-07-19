@@ -208,6 +208,7 @@ table {
     border: 1px solid transparent;
     background-color: #f4f5f5;
     padding: 0 10px;
+    color: #333333;
 }
 .el-form-item{
     margin-bottom: 0;
@@ -253,4 +254,7 @@ table {
 .form{
     width: 600px;
     padding: 0 60px;
+}
+.form .form_fieldset{
+   border-bottom: 1px solid #f1f1f2;
 }
