@@ -14,7 +14,17 @@ Write = {
                       </el-form-item>
                       <div class="g_h18 bold g_mar20t g_pad12b form_fieldset">今日工作</div>
                       <div>
-                      今日工作
+                      <div class="flex pro_list g_mar20t">
+                        <div class="g_img flex_content_center g_wid120_ah icon_add_box" @click="addProject">
+                            <div>
+                                <div class="g_wid40_ah icon_add block_center"></div>
+                                <p class="g_h14 g_mar4t g_text2_color">添加项目</p>
+                            </div>
+                        </div>
+                        <div class="flex1">
+                            
+                        </div>
+                      </div>
                       </div>
                       <div class="g_h18 bold g_mar20t g_pad12b form_fieldset">明日计划</div>
                       <div>
@@ -29,11 +39,24 @@ Write = {
                 <el-button class="el_btn_beautiful el_btn_beautiful_cancel" plain>朴素按钮</el-button>
             </div> 
             <div class="empty_height_bottom"></div>
+            <model v-model:isOpen="selectProject" modelClass="model_select_project flex">
+                <div class="left g_pad20lr">
+                    <div class="title g_pad40tb g_h18">选择项目</div>
+                    <div class="g_mar10b_s">
+                        <p v-for="item in projectType" class="g_pad16tb g_h14 g_pad16l">{{item}}</p>
+                    </div>
+                </div>
+                <div class="flex1 g_scroll_y right">
+                
+                </div>
+            </model>
         </div> 
     `,
     data(){
         return {
+            selectProject:false,
             projectList:[],
+            projectType:[],
             form:{
                 requestname:'工作日报与计划-周章锋-2021-07-16',
                 field7673:'2021-07-16',
@@ -91,11 +114,16 @@ Write = {
                     if(times==pageTotal){
                         console.log('current:'+times)
                         console.log('pageTotal'+pageTotal)
-                        //宣告数据以获取完成
+                        //宣告数据已获取完成
                         this.projectList=projectList.sort(function (a,b){
                             return parseInt(b.id)-parseInt(a.id)
                         })
                         console.log(this.projectList)
+                        let projectType=this.projectList.map(item=>{
+                            return item.xmmc
+                        }).filter((item,index,data)=>data.indexOf(item)==index)
+                        projectType.unshift('全部项目')
+                        this.projectType=projectType
                         // write()
                     }
                 })
@@ -112,5 +140,8 @@ Write = {
                 }
             });
         },
+        addProject(){
+            this.selectProject=true
+        }
     }
 }

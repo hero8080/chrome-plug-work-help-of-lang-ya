@@ -260,6 +260,78 @@ app.component('loading', {
   `
 })
 
+//loading
+app.component('model', {
+    name: 'Model',
+    props: {
+        isOpen: {
+            type: Boolean,
+            default: false
+        },
+        modelClass:{
+            type: String,
+        },
+        zIndex: {
+            default:1
+            /*default(){
+                let modelIndex=localStorage.getItem('model_index')
+                if(modelIndex){
+                    modelIndex=parseInt(modelIndex)+1
+                    localStorage.setItem('model_index',modelIndex)
+                }else{
+                    modelIndex=1
+                    localStorage.setItem('model_index',modelIndex)
+                }
+                return modelIndex
+            }*/
+        }
+    },
+    watch: {
+        isOpen (nvalue) {
+            // eslint-disable-next-line eqeqeq
+            if (nvalue == false) {
+                this.close()
+            }
+        }
+    },
+    data () {
+        return {
+            willClose: false
+        }
+    },
+    methods: {
+        closeModel (e) {
+            // eslint-disable-next-line eqeqeq
+            if (e.target.dataset.close == 'mask') {
+                this.close()
+            }
+        },
+        close () {
+            this.$emit('update:isOpen', false)
+            this.$emit('close')
+            this.willClose = true
+            setTimeout(() => {
+                this.willClose = false
+            }, 300)
+        }
+    },
+    mounted () {
+        document.body.appendChild(this.$el)
+    },
+    beforeDestroy () {
+        document.body.removeChild(this.$el)
+    },
+    template: `
+	<div class="mask" @click="closeModel" data-close="mask" :class="{open:isOpen,will_close:willClose}" :style="{zIndex:zIndex}">
+        <div class="model">
+            <div class="model_content" :class="modelClass">
+                <slot></slot>
+            </div>
+        </div>
+    </div>
+  `
+})
+
 //安装ele
 app.use(ElementPlus);
 
