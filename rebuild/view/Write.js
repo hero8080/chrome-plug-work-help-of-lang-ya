@@ -15,7 +15,7 @@ Write = {
                       <div class="g_h18 bold g_mar20t g_pad12b form_fieldset">今日工作</div>
                       <div>
                       <div class="flex pro_list g_mar20t">
-                        <div class="g_img flex_content_center g_wid120_ah icon_add_box" @click="addProject">
+                        <div class="g_img flex_content_center g_wid120_ah icon_add_box point" @click="addProject">
                             <div>
                                 <div class="g_wid40_ah icon_add block_center"></div>
                                 <p class="g_h14 g_mar4t g_text2_color">添加项目</p>
