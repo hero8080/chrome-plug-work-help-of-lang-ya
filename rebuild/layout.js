@@ -468,6 +468,8 @@ let colors = {
     form_label_color:'#404346',
     cancel_color:'#6b7075',
     form_main_color:'#fe2c55',
+    form_select_bg_color:'#eeeeee',
+    form_select_active_color:'#e7e7e7',
 }
 let keyIndex=0
 for(let key in colors){
