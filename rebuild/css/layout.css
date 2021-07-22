@@ -29,9 +29,10 @@ a:focus{
 }
 /*fieldset*/
 fieldset {
-    border: 1px solid #c0c0c0;
-    margin: 0 2px;
-    padding: 0.35em 0.625em 0.75em;
+    border: 1px solid #f1f1f2;
+    margin: 0;
+    padding: 10px 20px 10px;
+    border-radius:5px
 }
 /*图片*/
 img{
@@ -1408,6 +1409,7 @@ input,textarea{
 /*颜色类*/
 :root{
         --main_color:#0b59da;
+        --main_active_color:#004abd;
         --desc_color:#636d7e;
         --border_color:#e5ecf0;
         --text_color:#1a1a1a;
@@ -1420,14 +1422,23 @@ input,textarea{
         --form_label_color:#404346;
         --cancel_color:#6b7075;
         --form_main_color:#fe2c55;
+        --form_main_active_color:#db2045;
         --form_select_bg_color:#eeeeee;
+        --form_select_bg_active_color:#e8e8e8;
         --form_select_active_color:#e7e7e7;
+        --form_add_pro_btn_color:#d4d4d4;
     }
 .g_main_color{
     color: var(--main_color);
 }
 .g_main_bgcolor{
     background-color: var(--main_color);
+}
+.g_main_active_color{
+    color: var(--main_active_color);
+}
+.g_main_active_bgcolor{
+    background-color: var(--main_active_color);
 }
 .g_desc_color{
     color: var(--desc_color);
@@ -1474,19 +1485,19 @@ input,textarea{
 .g_input_bg_color{
     color: var(--input_bg_color);
 }
-.g_input_bgbg_bgcolor{
+.g_input_bg_bgcolor{
     background-color: var(--input_bg_color);
 }
 .g_fieldset_border_color{
     color: var(--fieldset_border_color);
 }
-.g_fieldset_bgborder_bgcolor{
+.g_fieldset_border_bgcolor{
     background-color: var(--fieldset_border_color);
 }
 .g_form_label_color{
     color: var(--form_label_color);
 }
-.g_form_bglabel_bgcolor{
+.g_form_label_bgcolor{
     background-color: var(--form_label_color);
 }
 .g_cancel_color{
@@ -1498,20 +1509,38 @@ input,textarea{
 .g_form_main_color{
     color: var(--form_main_color);
 }
-.g_form_bgmain_bgcolor{
+.g_form_main_bgcolor{
     background-color: var(--form_main_color);
+}
+.g_form_main_active_color{
+    color: var(--form_main_active_color);
+}
+.g_form_main_active_bgcolor{
+    background-color: var(--form_main_active_color);
 }
 .g_form_select_bg_color{
     color: var(--form_select_bg_color);
 }
-.g_form_bgselect_bgbg_bgcolor{
+.g_form_select_bg_bgcolor{
     background-color: var(--form_select_bg_color);
+}
+.g_form_select_bg_active_color{
+    color: var(--form_select_bg_active_color);
+}
+.g_form_select_bg_active_bgcolor{
+    background-color: var(--form_select_bg_active_color);
 }
 .g_form_select_active_color{
     color: var(--form_select_active_color);
 }
-.g_form_bgselect_bgactive_bgcolor{
+.g_form_select_active_bgcolor{
     background-color: var(--form_select_active_color);
+}
+.g_form_add_pro_btn_color{
+    color: var(--form_add_pro_btn_color);
+}
+.g_form_add_pro_btn_bgcolor{
+    background-color: var(--form_add_pro_btn_color);
 }
 
 /*栅格布局*/

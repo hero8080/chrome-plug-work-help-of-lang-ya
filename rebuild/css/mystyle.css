@@ -187,6 +187,18 @@ table {
     border: none;
     background-color: var(--form_main_color);
     margin-right: 0;
+    color: white;
+    transition: all 0.3s;
+}
+.el-button:focus, .el-button:hover {
+    background-color: var(--form_main_active_color);
+    color: white;
+    border: none;
+}
+.el-button.is-plain:focus, .el-button.is-plain:hover {
+    color: var(--form_main_color);
+    background-color: var(--form_select_bg_active_color);
+    border: none;
 }
 .el_btn_beautiful_cancel{
     color: var(--cancel_color);
@@ -202,7 +214,10 @@ table {
     color: var(--form_label_color);
     margin: 20px 0 6px;
 }
-.el-input__inner {
+.el-textarea__inner {
+    padding: 4px 10px !important;
+}
+.el-input__inner,.el-textarea__inner {
     height: 32px;
     border-radius: 3px;
     border: 1px solid transparent;
@@ -213,7 +228,7 @@ table {
 .el-form-item{
     margin-bottom: 0;
 }
-.el-input__inner:hover {
+.el-input__inner:hover,.el-textarea__inner:hover {
     border-color: #7cb8ff;
 }
 .el-input.is-active .el-input__inner, .el-input__inner:focus {
@@ -253,38 +268,31 @@ table {
 }
 
 .form{
-    width: 700px;
+    width: 550px;
     padding: 0 60px;
 }
-.form .form_fieldset{
+.form .form_fieldset,.form_pro_list{
    border-bottom: 1px solid var(--fieldset_border_color);
 }
-.form .icon_add:before{
-    content: '';
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    width: 26px;
-    height: 2px;
-    background-color: var(--darkgray_color);
-}
 .form .icon_add_box{
-   background-color: var(--input_bg_color);
    border-radius: 3px;
+   border: 1px dashed var(--form_add_pro_btn_color);
 }
-.form .icon_add:after{
-    content: '';
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    height: 26px;
-    width: 2px;
-    background-color: var(--darkgray_color);
+.form .icon_add_box:hover{
+    border: 1px dashed var(--main_color);
 }
+.form .textarea .el-textarea__inner{
+    height: 100px;
+}
+.form .slider{
+    width: 60%;
+}
+.form .slider .el-slider__button{
+    width: 16px;
+    height: 16px;
+    border-width: 4px;
+}
+
 
 .model_select_project{
     width: calc(80vh * 16 / 9);
@@ -319,18 +327,28 @@ table {
 .model_select_project .select_title{
     padding: 40px 50px;
 }
+.model_select_project .project_user_select{
+    background-color: var(--bg_color);
+}
 
 /*svg_icon*/
 .svg_icon{
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center;
-    background-color: currentColor;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 .svg_icon_block{
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='30px' height='30px'%3E %3Cpath fill-rule='evenodd' fill='rgb(137, 137, 137)' d='M8.000,6.000 L12.000,6.000 C13.105,6.000 14.000,6.895 14.000,8.000 L14.000,12.000 C14.000,13.105 13.105,14.000 12.000,14.000 L8.000,14.000 C6.895,14.000 6.000,13.105 6.000,12.000 L6.000,8.000 C6.000,6.895 6.895,6.000 8.000,6.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(137, 137, 137)' d='M18.000,6.000 L22.000,6.000 C23.105,6.000 24.000,6.895 24.000,8.000 L24.000,12.000 C24.000,13.105 23.105,14.000 22.000,14.000 L18.000,14.000 C16.895,14.000 16.000,13.105 16.000,12.000 L16.000,8.000 C16.000,6.895 16.895,6.000 18.000,6.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(137, 137, 137)' d='M8.000,16.000 L12.000,16.000 C13.105,16.000 14.000,16.895 14.000,18.000 L14.000,22.000 C14.000,23.105 13.105,24.000 12.000,24.000 L8.000,24.000 C6.895,24.000 6.000,23.105 6.000,22.000 L6.000,18.000 C6.000,16.895 6.895,16.000 8.000,16.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(137, 137, 137)' d='M18.000,16.000 L22.000,16.000 C23.105,16.000 24.000,16.895 24.000,18.000 L24.000,22.000 C24.000,23.105 23.105,24.000 22.000,24.000 L18.000,24.000 C16.895,24.000 16.000,23.105 16.000,22.000 L16.000,18.000 C16.000,16.895 16.895,16.000 18.000,16.000 Z'/%3E %3C/svg%3E");
 }
 .svg_icon_list{
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='30px' height='30px'%3E %3Cpath fill-rule='evenodd' fill='rgb(137, 137, 137)' d='M7.500,7.000 L22.500,7.000 C23.328,7.000 24.000,7.672 24.000,8.500 L24.000,9.500 C24.000,10.328 23.328,11.000 22.500,11.000 L7.500,11.000 C6.672,11.000 6.000,10.328 6.000,9.500 L6.000,8.500 C6.000,7.672 6.672,7.000 7.500,7.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(137, 137, 137)' d='M7.500,13.000 L22.500,13.000 C23.328,13.000 24.000,13.672 24.000,14.500 L24.000,15.500 C24.000,16.328 23.328,17.000 22.500,17.000 L7.500,17.000 C6.672,17.000 6.000,16.328 6.000,15.500 L6.000,14.500 C6.000,13.672 6.672,13.000 7.500,13.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(137, 137, 137)' d='M7.500,19.000 L22.500,19.000 C23.328,19.000 24.000,19.672 24.000,20.500 L24.000,21.500 C24.000,22.328 23.328,23.000 22.500,23.000 L7.500,23.000 C6.672,23.000 6.000,22.328 6.000,21.500 L6.000,20.500 C6.000,19.672 6.672,19.000 7.500,19.000 Z'/%3E %3C/svg%3E");
+}
+.svg_icon_more_menu{
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20px' height='20px'%3E %3Cpath fill-rule='evenodd' fill='rgb(197, 197, 197)' d='M3.000,8.000 C4.105,8.000 5.000,8.895 5.000,10.000 C5.000,11.105 4.105,12.000 3.000,12.000 C1.895,12.000 1.000,11.105 1.000,10.000 C1.000,8.895 1.895,8.000 3.000,8.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(197, 197, 197)' d='M17.000,8.000 C18.105,8.000 19.000,8.895 19.000,10.000 C19.000,11.105 18.105,12.000 17.000,12.000 C15.895,12.000 15.000,11.105 15.000,10.000 C15.000,8.895 15.895,8.000 17.000,8.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(225, 225, 225)' d='M10.000,7.000 C11.657,7.000 13.000,8.343 13.000,10.000 C13.000,11.657 11.657,13.000 10.000,13.000 C8.343,13.000 7.000,11.657 7.000,10.000 C7.000,8.343 8.343,7.000 10.000,7.000 Z'/%3E %3C/svg%3E");
 }
 
 /*label*/

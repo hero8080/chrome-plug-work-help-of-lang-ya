@@ -33,9 +33,10 @@ a:focus{
 }
 /*fieldset*/
 fieldset {
-    border: 1px solid #c0c0c0;
-    margin: 0 2px;
-    padding: 0.35em 0.625em 0.75em;
+    border: 1px solid #f1f1f2;
+    margin: 0;
+    padding: 10px 20px 10px;
+    border-radius:5px
 }
 /*图片*/
 img{
@@ -456,6 +457,7 @@ layout+=`\n
 /*颜色类*/`
 let colors = {
     main_color:'#0b59da',
+    main_active_color:'#004abd',
     desc_color:'#636d7e',
     border_color:'#e5ecf0',
     text_color:'#1a1a1a',
@@ -468,8 +470,11 @@ let colors = {
     form_label_color:'#404346',
     cancel_color:'#6b7075',
     form_main_color:'#fe2c55',
+    form_main_active_color:'#db2045',
     form_select_bg_color:'#eeeeee',
+    form_select_bg_active_color:'#e8e8e8',
     form_select_active_color:'#e7e7e7',
+    form_add_pro_btn_color:'#d4d4d4',
 }
 let keyIndex=0
 for(let key in colors){
@@ -486,7 +491,7 @@ for(let key in colors){
 .g_${key}{
     color: var(--${key});
 }
-.g_${key.split('_').join('_bg')}{
+.g_${key.replace(/_color/ig,'_bgcolor')}{
     background-color: var(--${key});
 }`
 }
