@@ -293,6 +293,33 @@ table {
     border-width: 4px;
 }
 
+.select_pro_menu{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 130px;
+    border-radius: 5px;
+    color: var(--cancel_color);
+    transform: scale(0);
+    transform-origin: left top;
+    background-color: white;
+    box-shadow: 0 0 16px 0 var(--form_add_pro_btn_color);
+}
+.svg_icon_more_menu .empty{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.svg_icon_more_menu:hover .select_pro_menu{
+    transform: scale(1);
+}
+.select_pro_menu p:hover{
+    color: var(--main_color);
+    background-color: var(--input_bg_color);
+}
 
 .model_select_project{
     width: calc(80vh * 16 / 9);
@@ -325,7 +352,7 @@ table {
     overflow: scroll;
 }
 .model_select_project .select_title{
-    padding: 40px 50px;
+    padding: 40px 50px 20px;
 }
 .model_select_project .project_user_select{
     background-color: var(--bg_color);

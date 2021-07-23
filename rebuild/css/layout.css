@@ -3,7 +3,7 @@ body,input,textarea,button,select{
     font-family: "PingFang SC","Lantinghei SC","Microsoft YaHei","HanHei SC","Helvetica Neue","Open Sans",Arial,"Hiragino Sans GB","微软雅黑",STHeiti,"WenQuanYi Micro Hei",SimSun,sans-serif;
 }
 *{
-    /* box-shadow: 0 0 0 1px red; */
+     /*box-shadow: 0 0 0 1px red;*/
 }
 /*边距*/
 body,p,form,h1,h2,h3,h4,h5,h6,ul,ul>li,input,textarea{

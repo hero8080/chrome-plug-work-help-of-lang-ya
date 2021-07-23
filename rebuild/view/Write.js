@@ -19,7 +19,6 @@ Write = {
                               <div v-for="(item,index) in form.projectList" class="g_pad16t">
                                    <fieldset>
                                    <legend class="g_h14 g_desc_color">项目{{index+1}}-{{item.xmmk}}</legend>
-                                   
                                    <div class="g_pad20b g_pad4t form_pro_list flex_center">
                                        <div class="g_img g_radius4 g_wid60_ah g_form_select_active_bgcolor">
                                         </div>
@@ -31,7 +30,14 @@ Write = {
                                                 <span :title="'所属分类<'+item.xmfl+'>'">{{item.xmfl}}</span>
                                             </div>
                                         </div>
-                                        <div class="svg_icon svg_icon_more_menu"></div>
+                                        <div class="svg_icon svg_icon_more_menu g_pointer">
+                                            <div class="empty"></div>
+                                            <div class="select_pro_menu g_transition g_h14 g_pad8_s g_pad16l_s g_pad8tb">
+                                                <p class="g_transition g_pointer" @click="changeProject(index)">切换项目</p>
+                                                <p class="g_transition g_pointer" @click="deletPro(form.projectList,index)">删除项目</p>
+                                                <p class="g_transition g_pointer" @click="addDesc(item)">{{item.isShowDesc?'移除':'添加'}}备注</p>
+                                            </div>
+                                        </div>
                                       </div>
                                       <div class="slider">
                                             <div class="flex_center g_pad20t g_h14 g_cancel_color">
@@ -65,7 +71,6 @@ Write = {
                                             </el-radio-group>
                                           </el-form-item>
                                       </div>
-                                      
                                       <el-form-item 
                                         :key="item.key"
                                         :prop="'projectList.' + index + '.field7691'"
@@ -75,11 +80,17 @@ Write = {
                                       >
                                         <el-input class="textarea" type="textarea" v-model="item.field7691" placeholder="写点啥"></el-input>
                                       </el-form-item>
-                                      <div class="g_wid20_h"></div>
-                                   
+                                      <div class="g_pad24t" v-if="item.isShowDesc">
+                                          <el-form-item 
+                                            :key="item.key"
+                                            :prop="'projectList.' + index + '.field7695'"
+                                          >
+                                            <el-input class="textarea" type="textarea" v-model="item.field7695" placeholder="请填写备注"></el-input>
+                                          </el-form-item>
+                                      </div>
+                                      <div class="g_pad12t"></div>
                                    </fieldset>
                               </div>
-                              
                               <div class="g_mar20t">                     
                                 <div class="flex_center g_pad32l g_h14 g_pad12tb g_main_color icon_add_box g_pointer g_transition" @click="addProject"> +添加项目</div>
                               </div>
@@ -91,22 +102,25 @@ Write = {
                 </div>
             </div> 
             <div class="flex1 empty_content_bottom g_pad32t g_pad28bt g_pad60l">
-                <el-button class="el_btn_beautiful" @click="submitForm">成功按钮</el-button>
+                <el-button class="el_btn_beautiful" @click="submitForm">提交日志</el-button>
                 <el-button class="el_btn_beautiful el_btn_beautiful_cancel" plain>朴素按钮</el-button>
             </div> 
             <div class="empty_height_bottom"></div>
             <!--选择项目弹窗-->
             <model v-model:isOpen="selectProject" modelClass="model_select_project flex">
                 <div class="left g_pad20lr">
-                    <div class="title g_pad40tb g_h18">选择项目</div>
+                    <div class="title g_pad40tb g_h18">{{isChangePro?'切换':'选择'}}项目</div>
                     <div class="g_mar12b_s">
                         <p v-for="(item,index) in projectType" class="g_pad12tb g_h14 g_pad16l g_pointer" :class="{project_select:index==projectSelectIndex}" @click="projectSelectIndex=index">{{item}}</p>
                     </div>
                 </div>
                 <div class="flex1 flex_column right">
 <!--                    <div class="g_wid20_h"></div>-->
-                    <div class="g_h18 select_title flex_center">
-                        <p class="flex1 g_text_color">{{projectType[projectSelectIndex]}}</p>
+                    <div class="select_title flex_center">
+                        <div class="flex1 g_text_color">
+                            <p class="g_h18">{{projectType[projectSelectIndex]}}</p>
+                            <p class="g_h14 g_pad8t g_text2_color" v-if="!isChangePro">按住ctrl键可多选项目</p>
+                        </div>
                         <div 
                         class="g_mar8r g_wid30_ah svg_icon g_text2_bgcolor g_pointer"
                         :class="isBlocViewkModel?'svg_icon_list':'svg_icon_block'" 
@@ -115,7 +129,7 @@ Write = {
                     <div class="flex1 g_scroll_y">
                         <div class="g_col_4_16 g_mar16b_s g_scroll_width" v-if="isBlocViewkModel">
                             <div v-for="item in projectSelecData" class="g_pad20 pro_list g_pointer g_radius4"
-                            :class="{project_user_select:projectUserSelect==item.id}" @click="projectUserSelect=item.id"
+                            :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
                             >
                                 <div class="g_img g_radius4 g_wid60_ah g_form_select_active_bgcolor block_center">
                                 
@@ -127,7 +141,7 @@ Write = {
                         </div>
                         <div class="g_col_3_16 g_mar16b_s g_scroll_width" v-else>
                             <div v-for="item in projectSelecData" class="g_pad20 pro_list flex_center g_pointer g_radius4"
-                            :class="{project_user_select:projectUserSelect==item.id}" @click="projectUserSelect=item.id"
+                            :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
                             >
                                 <div class="g_img g_radius4 g_wid60_ah g_form_select_active_bgcolor">
                                 
@@ -142,10 +156,9 @@ Write = {
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
-                    <div class="text_center g_mar40tb">
-                        <el-button class="el_btn_beautiful" @click="selectProjectNext">下一步</el-button>
+                    <div class="text_center g_mar40b g_pad20t">
+                        <el-button class="el_btn_beautiful" @click="selectProjectNext">{{isChangePro?'确认切换项目':'下一步'}}</el-button>
                     </div>
                 </div>
             </model>
@@ -154,6 +167,8 @@ Write = {
     data() {
         return {
             selectProject: false,
+            isChangePro:false,
+            isChangeProIndex:0,
             projectList: [],
             projectType: [],
             projectSelectIndex: 0,
@@ -162,7 +177,6 @@ Write = {
             form: {
                 requestname: '工作日报与计划-周章锋-2021-07-16',
                 field7673: '2021-07-16',
-
                 projectList: [],
             },
             rules: {
@@ -173,7 +187,6 @@ Write = {
                     {required: true, message: '请输入日报日期', trigger: 'blur'}
                 ],
             },
-
         };
     },
     computed: {
@@ -259,27 +272,77 @@ Write = {
             });
         },
         addProject() {
+            this.projectList.map(pro=>{
+                pro.isSelect=false
+            })
+            this.isChangePro=false
             this.selectProject = true
         },
         selectProjectNext() {
-            let data = this.projectList.filter(item => item.id == this.projectUserSelect)[0]
+            let data = this.projectList.filter(item => item.isSelect==true)
             console.log(data)
-            data={
-                ...data,
-                key:new Date().getTime(),
-                "field11407": data.xmmc,
-                "field11406": data.id,
-                "field11406_name": data.xmmk,
-                "field7691": "",//内容
-                "field7692": 0,//计划内
-                "field7693": 0,//进度
-                "field7694": 7.0,//工时
-                "field7695": "",//备注
-                "field7705": 2411,
+            if(this.isChangePro){
+                if(!data.length){
+                    this.$message('啊哦,巧了,尚未检查到您选择的项目!')
+                    return
+                }
+                // console.log(this.form.projectList[this.isChangeProIndex])
+                let _data=data[0]
+                this.form.projectList[this.isChangeProIndex]={
+                    ...this.form.projectList[this.isChangeProIndex],
+                    ..._data,
+                    "field11407": _data.xmmc,
+                    "field11406": _data.id,
+                    "field11406_name": _data.xmmk,
+                }
+                // this.form={...this.form}
+            }else{
+                data.map(item=>{
+                    let _data={
+                        ...item,
+                        key:new Date().getTime(),
+                        "field11407": item.xmmc,
+                        "field11406": item.id,
+                        "field11406_name": item.xmmk,
+                        "field7691": "",//内容
+                        "field7692": 0,//计划内
+                        "field7693": 0,//进度
+                        "field7694": 7.0,//工时
+                        "field7695": "",//备注
+                        "field7705": 2411,
+                        "isShowDesc":false,
+                    }
+                    this.form.projectList.push(_data)
+                })
+
             }
-            this.form.projectList.push(data)
+
             this.selectProject = false
             this.projectUserSelect = null
+        },
+        addDesc(item){
+            item.isShowDesc=!item.isShowDesc
+        },
+        changeProject(index){
+            this.projectList.map(pro=>{
+                pro.isSelect=false
+            })
+            this.isChangePro=true
+            this.isChangeProIndex=index
+            this.selectProject=true
+        },
+        deletPro(list,item,index){
+            list.splice(index,1)
+        },
+        projectSelect(e,item){
+            if(e.ctrlKey&&!this.isChangePro){
+                item.isSelect=!item.isSelect
+            }else{
+                this.projectList.map(pro=>{
+                    pro.isSelect=false
+                })
+                item.isSelect=true
+            }
         }
     }
 }
