@@ -13,7 +13,7 @@ Write = {
                           <el-form-item label="日报日期" prop="field7673">
                             <el-input v-model="form.field7673" placeholder="请输入日报日期"></el-input>
                           </el-form-item>
-                          <div class="g_h18 bold g_mar20t g_pad12b form_fieldset">今日工作</div>
+                          <div class="g_h18 bold g_mar40t g_pad12b form_fieldset">今日工作</div>
                           <div>
                               <!--项目列表-->
                               <div v-for="(item,index) in form.projectList" class="g_pad16t">
@@ -95,15 +95,32 @@ Write = {
                                 <div class="flex_center g_pad32l g_h14 g_pad12tb g_main_color icon_add_box g_pointer g_transition" @click="addProject"> +添加项目</div>
                               </div>
                           </div>
-                          <div class="g_h18 bold g_mar20t g_pad12b form_fieldset">明日计划</div>
-                          <div>明日计划</div>
+                          <div class="g_h18 bold g_mar40t g_pad12b form_fieldset">明日计划</div>
+                          <el-form-item
+                            label="工作内容"
+                            prop="field7696_1"
+                          >
+                            <el-input class="textarea" type="textarea" v-model="form.field7696_1" placeholder="写点啥"></el-input>
+                          </el-form-item>
+                          <el-form-item
+                            label="需协助内容"
+                            prop="field7697_1"
+                          >
+                            <el-input class="textarea" type="textarea" v-model="form.field7697_1" placeholder="写点啥"></el-input>
+                          </el-form-item>
+                          <el-form-item
+                            label="备注"
+                            prop="field7698_1"
+                          >
+                            <el-input class="textarea" type="textarea" v-model="form.field7698_1" placeholder="写点啥"></el-input>
+                          </el-form-item>
                     </el-form>
                     <div class="g_wid20_h"></div>
                 </div>
             </div> 
             <div class="flex1 empty_content_bottom g_pad32t g_pad28bt g_pad60l">
                 <el-button class="el_btn_beautiful" @click="submitForm">提交日志</el-button>
-                <el-button class="el_btn_beautiful el_btn_beautiful_cancel" plain>朴素按钮</el-button>
+<!--                <el-button class="el_btn_beautiful el_btn_beautiful_cancel" plain>取消</el-button>-->
             </div> 
             <div class="empty_height_bottom"></div>
             <!--选择项目弹窗-->
@@ -178,6 +195,9 @@ Write = {
                 requestname: '工作日报与计划-周章锋-2021-07-16',
                 field7673: '2021-07-16',
                 projectList: [],
+                field7696_1:'',
+                field7697_1:'',
+                field7698_1:'',
             },
             rules: {
                 requestname: [
@@ -185,7 +205,7 @@ Write = {
                 ],
                 field7673: [
                     {required: true, message: '请输入日报日期', trigger: 'blur'}
-                ],
+                ]
             },
         };
     },
@@ -200,6 +220,7 @@ Write = {
     watch: {
         _isGetData(data) {
             data && this.getProject()
+            this.initFormData()
         }
     },
     created() {
@@ -208,6 +229,18 @@ Write = {
         }
     },
     methods: {
+        getDate(){
+            let date=new Date()
+            let add0=(num,prefix='')=>{
+                return num<10?prefix+'0'+num:prefix+num
+            }
+            return add0(date.getFullYear())+add0(date.getMonth()+1,'-')+add0(date.getDate(),'-')
+        },
+        initFormData(){
+            let date=this.getDate()
+            this.form.requestname=`工作日报与计划-${this._userInfo.username}-${date}`
+            this.form.field7673=date
+        },
         clearHtmlTag(str) {
             return str.replace(/<\/?.+?\/?>/g, '').replace(/&nbsp;/ig, '')
         },
@@ -263,7 +296,34 @@ Write = {
         submitForm() {
             this.$refs.form.validate((valid) => {
                 if (valid) {
-                    console.log(this.form)
+                    let projectList=[...this.form.projectList]
+                    if(!projectList.length){
+                        this.$message('啊哦,巧了,尚未检查到您添加的项目!')
+                        return
+                    }
+                    let subMitData={
+                        "requestname": this.form.requestname,
+                        "field7673": this.form.field7673,
+
+                        "field7696_1": this.form.field7696_1,
+                        "field7697_1": this.form.field7697_1,
+                        "field7698_1": this.form.field7698_1,
+                    }
+
+                    projectList.map((item,index)=>{
+                        for(let key in item){
+                            let _key=''
+                            if(key.search(/_name/ig)!==-1){
+                                //有name
+                                _key=key.replace(/_name/i,'_'+index+'nmae')
+                            }else{
+                                //无name
+                                _key=key+'_'+index
+                            }
+                            subMitData[_key]=item[key]
+                        }
+                    })
+                    console.log(subMitData)
                     alert('submit!');
                 } else {
                     console.log('error submit!!');

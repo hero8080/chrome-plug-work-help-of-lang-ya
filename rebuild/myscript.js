@@ -18,8 +18,8 @@ resetHead()
 const store = Vuex.createStore({
     state () {
         return {
-            _userInfo: false,
-            _leftMenuTree: false,
+            _userInfo: {},
+            _leftMenuTree: {},
             _isGetData:false
         }
     },
