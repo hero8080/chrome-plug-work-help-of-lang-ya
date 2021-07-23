@@ -205,6 +205,9 @@ Write = {
                 ],
                 field7673: [
                     {required: true, message: '请输入日报日期', trigger: 'blur'}
+                ],
+                field7696_1: [
+                    {required: true, message: '请输入工作内容', trigger: 'blur'}
                 ]
             },
         };
@@ -311,7 +314,21 @@ Write = {
                     }
 
                     projectList.map((item,index)=>{
+                        let keys=[
+                            "field11407",
+                            "field11406",
+                            "field11406_name",
+                            "field7691",
+                            "field7692",
+                            "field7693",
+                            "field7694",
+                            "field7695",
+                            "field7705"
+                        ]
                         for(let key in item){
+                            if(keys.indexOf(key)==-1){
+                                continue
+                            }
                             let _key=''
                             if(key.search(/_name/ig)!==-1){
                                 //有name
