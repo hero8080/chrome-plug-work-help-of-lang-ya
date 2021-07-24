@@ -70,7 +70,7 @@ document.body.innerHTML = `
                         <p class="g_text2_color g_h14">{{userInfo.jobs}} | {{userInfo.deptname}}－{{userInfo.subcompanyname}}</p>
                     </div>
                 </div>
-                <router-view></router-view>
+                <router-view v-if="isRouterAlive"></router-view>
             </div>
         </template>
 	</div>
@@ -113,7 +113,12 @@ const vueApp = {
                 })
                 return msg
             })(),
-            //数据加载状态
+            isRouterAlive: true  //控制视图是否显示的变量
+        }
+    },
+    provide () {    //父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
+        return {
+            reload: this.reload
         }
     },
     watch:{
@@ -125,7 +130,7 @@ const vueApp = {
         this.init()
     },
     methods:{
-        init(){
+        init(isReload=false){
             let loadStatus=0
             let userInfo={}
             let leftMenuTree={}
@@ -136,6 +141,7 @@ const vueApp = {
                         _leftMenuTree:leftMenuTree,
                         _isGetData:true
                     })
+                    isReload&&this.reload()
                 }
             }
             /*login({userName:'zhouzhangfeng',userpassword:'zzf808080'},'isGetData',this).then(res=>{
@@ -168,6 +174,12 @@ const vueApp = {
                 //提示登录
                 console.log('提示登录')
             }*/
+        },
+        reload () {
+            this.isRouterAlive = false;            //先关闭，
+            this.$nextTick(function () {
+                this.isRouterAlive = true;         //再打开
+            })
         }
     }
 }

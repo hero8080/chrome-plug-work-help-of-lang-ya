@@ -73,29 +73,6 @@ function xhr(loading,_this){
                     if ( oxhr.status == 200 ) {
                         // console.log(oxhr.responseText)
                         let result=JSON.parse(oxhr.responseText)
-                        if(result.errorCode=='002'){
-                            //判断是否可以自动登录
-                            let saveAccount=cache('saveAccount')
-                            let account=cache('account')
-                            if(account&&saveAccount){
-                                _app.$message({
-                                    message: '正在为您自动登录...'
-                                })
-                                login(account).then(res=>{
-                                    _app.$message({
-                                        message: '登录成功'
-                                    })
-                                    _app.init()
-                                })
-                            }else{
-                                //跳转至登录页面
-                                _this.$message({
-                                    message: result.msg,
-                                    type: 'warning'
-                                })
-                                _app.$router.replace('/login')
-                            }
-                        }
                         resolve(result)
                     } else {
                         console.log(oxhr.status)
@@ -146,6 +123,7 @@ function xhr(loading,_this){
     }
 }
 //get方法
+let isAutoLoginIng=false
 async function get(url,param,loading,_this,method='get'){
     //判断又没有公钥
     if(!cache('pubRsaKey')){
@@ -161,12 +139,47 @@ async function get(url,param,loading,_this,method='get'){
         param.loginid = rsaDataEncrypt(param.loginid)
         param.userpassword = rsaDataEncrypt(param.userpassword)
     }
+    let result=null
     if(method.toLowerCase()=='get'){
-        return new xhr(loading,_this).get(url,param)
+         result=new xhr(loading,_this).get(url,param)
     }
     if(method.toLowerCase()=='post'){
-        return new xhr(loading,_this).post(url,param)
+        result= new xhr(loading,_this).post(url,param)
     }
+    return new Promise((resolve,reject)=>{
+        result.then(res=>{
+            if(res.errorCode=='002'){
+                //判断是否可以自动登录
+                let saveAccount=cache('saveAccount')
+                let account=cache('account')
+                if(account&&saveAccount&&!isAutoLoginIng){
+                    isAutoLoginIng=true
+                    _app.$message({
+                        message: '正在为您自动登录...'
+                    })
+                    login(account).then(res=>{
+                        isAutoLoginIng=false
+                        _app.$message({
+                            message: '登录成功'
+                        })
+                        _app.init(true)
+                    })
+                }else{
+                    //跳转至登录页面
+                    _this.$message({
+                        message: result.msg,
+                        type: 'warning'
+                    })
+                    _app.$router.replace('/login')
+                }
+            }else{
+                resolve(res)
+            }
+        }).catch(error=>{
+            reject(error)
+        })
+    })
+
 }
 //post
 function post(url,param,loading,_this){
