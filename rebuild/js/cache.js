@@ -3,8 +3,8 @@ function createTime(){
     return parseInt(new Date().getTime() / 1000)
 }
 //设置缓存主函数
-function cache(key,value,expire=60*60*5){
-    //默认5个小时
+function cache(key,value,expire){
+    //默认5个小时60*60*5
     if(value){
         //设置缓存
         setLocalData(key,value,expire)
@@ -16,17 +16,16 @@ function cache(key,value,expire=60*60*5){
 //设置数据
 function setLocalData(key,value,expire){
     localStorage.setItem(key, value)
-    localStorage.setItem(key+'_expire', createTime()+expire)
+    if(expire){
+        localStorage.setItem(key+'_expire', createTime()+expire)
+    }
+
 }
 //获取数据
 function getLocalData(key){
     let oldexpire=localStorage.getItem(key+'_expire')
-    if(!oldexpire||oldexpire==''){
-        return false
-    }
     let newexpire=createTime()
-    console.log(oldexpire,newexpire,oldexpire-newexpire)
-    if(oldexpire-newexpire<=0){
+    if(oldexpire&&oldexpire-newexpire<0){
         //已过期
         localStorage.removeItem(key)
         localStorage.removeItem(key+'_expire')
@@ -39,6 +38,5 @@ function getLocalData(key){
         }catch (_){
             return data
         }
-
     }
 }
