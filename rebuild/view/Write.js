@@ -112,7 +112,7 @@ Write = {
                             label="备注"
                             prop="field7698_1"
                           >
-                            <el-input class="textarea" type="textarea" v-model="form.field7698_1" placeholder="写点啥"></el-input>
+                            <el-input class="textarea" type="textarea" v-model="form.field7698_1" placeholder="请填写备注"></el-input>
                           </el-form-item>
                     </el-form>
                     <div class="g_wid20_h"></div>

@@ -145,7 +145,7 @@ Login = {
                     //保存用户名和密码
                     cache('account',JSON.stringify(this.form))
                     this.$root.init()
-                    this.$router.replace('/')
+                    this.$router.replace('/write')
 
                 }
                 this.$message(res.msg)
