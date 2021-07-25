@@ -274,7 +274,7 @@ app.component('loading', {
         }
     },
     template: `
-	<div class="spinner" :style="{width:size*3+space*2+'px'}">
+	<div class="spinner" :style="{width:size*3+space*2+'px'}" :class="{spinner_absolute:position=='absolute'}">
         <div class="one" :style="{backgroundColor:color,width:size+'px',height:size+'px',marginRight:space+'px'}"></div>
         <div class="two" :style="{backgroundColor:color,width:size+'px',height:size+'px',marginRight:space+'px'}"></div>
         <div class="three" :style="{backgroundColor:color,width:size+'px',height:size+'px'}"></div>

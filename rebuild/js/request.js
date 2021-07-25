@@ -463,7 +463,7 @@ function getViewList(param,loading,_this){
     param={
         dataKey: '',
         current: 1,
-        sortParams: [],
+        sortParams: '[{"orderkey":"t1.requestname","sortOrder":"descend"}]',
         ...param
     }
     return post('api/ec/dev/table/datas',param,loading,_this)

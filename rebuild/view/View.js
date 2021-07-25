@@ -2,8 +2,8 @@ View = {
     template: `
         <div class="flex1 content">
             <div class="view_content">
-                <div v-if="loading" class="g_pad50tb">
-                    <loading></loading>
+                <div v-if="loading" class="g_pad50tb view_loading">
+                    <loading position="absolute"></loading>
                 </div>
                 <div v-if="columns&&columns.length>0" class="g_pad12">
                     <el-table :data="tableData" stripe border style="width: 100%">
