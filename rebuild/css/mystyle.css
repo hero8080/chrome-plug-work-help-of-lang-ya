@@ -324,6 +324,7 @@ table {
 .model_select_project{
     width: calc(80vh * 16 / 9);
     max-width: 80vw;
+    min-width: 1200px;
     height: 80vh;
 }
 .model_select_project .left{
