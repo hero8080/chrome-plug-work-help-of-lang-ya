@@ -4,7 +4,7 @@ Write = {
             <div class="empty_height"></div>
             <div class="empty_content_bottom g_pad40t g_pad12b g_h24 g_pad60l bold">写日志</div> 
             <!--表单-->
-            <div class="middle">
+            <div class="middle" ref="middle">
                 <div class="g_pad20tb content">
                     <el-form class="form" :rules="rules" label-position="top" :model="form" ref="form">
                           <el-form-item label="日报名称" prop="requestname">
@@ -95,7 +95,16 @@ Write = {
                                 <div class="flex_center g_pad32l g_h14 g_pad12tb g_main_color icon_add_box g_pointer g_transition" @click="addProject"> +添加项目</div>
                               </div>
                           </div>
-                          <div class="g_h18 bold g_mar40t g_pad12b form_fieldset">明日计划</div>
+                          <div class="g_mar40t g_pad12b form_fieldset flex_center">
+                                <p class="flex1 bold g_h18">明日计划</p>
+                                <div class="svg_icon svg_icon_more_menu g_pointer">
+                                    <div class="empty"></div>
+                                    <div class="select_pro_menu g_transition g_h14 g_pad8_s g_pad16l_s g_pad8tb">
+                                        <p class="g_transition g_pointer" @click="tomorrowPlain.isShowHelpData=!tomorrowPlain.isShowHelpData;form.field7697_1=''">{{tomorrowPlain.isShowHelpData?'移除':'添加'}}需协助内容</p>
+                                        <p class="g_transition g_pointer" @click="tomorrowPlain.isShowRemarkData=!tomorrowPlain.isShowRemarkData;form.field7698_1=''">{{tomorrowPlain.isShowRemarkData?'移除':'添加'}}备注</p>
+                                    </div>
+                                </div>
+                          </div>
                           <el-form-item
                             label="工作内容"
                             prop="field7696_1"
@@ -103,12 +112,14 @@ Write = {
                             <el-input class="textarea" type="textarea" v-model="form.field7696_1" placeholder="写点啥"></el-input>
                           </el-form-item>
                           <el-form-item
+                            v-if="tomorrowPlain.isShowHelpData"
                             label="需协助内容"
                             prop="field7697_1"
                           >
                             <el-input class="textarea" type="textarea" v-model="form.field7697_1" placeholder="写点啥"></el-input>
                           </el-form-item>
                           <el-form-item
+                            v-if="tomorrowPlain.isShowRemarkData"
                             label="备注"
                             prop="field7698_1"
                           >
@@ -119,7 +130,12 @@ Write = {
                 </div>
             </div> 
             <div class="flex1 empty_content_bottom g_pad32t g_pad28bt g_pad60l">
-                <el-button class="el_btn_beautiful" @click="submitForm">提交日志</el-button>
+                <el-button class="el_btn_beautiful" @click="submitForm">
+                    <loading v-if="submitFormLoaidng" size="8" space="2" color="fff"></loading>
+                    <template v-else>
+                        提交日志
+                    </template>
+                </el-button>
 <!--                <el-button class="el_btn_beautiful el_btn_beautiful_cancel" plain>取消</el-button>-->
             </div> 
             <div class="empty_height_bottom"></div>
@@ -199,6 +215,10 @@ Write = {
                 field7697_1:'',
                 field7698_1:'',
             },
+            tomorrowPlain:{
+              isShowHelpData:false,
+              isShowRemarkData:false,
+            },
             rules: {
                 requestname: [
                     {required: true, message: '请输入日报名称', trigger: 'blur'}
@@ -210,6 +230,7 @@ Write = {
                     {required: true, message: '请输入工作内容', trigger: 'blur'}
                 ]
             },
+            submitFormLoaidng:false
         };
     },
     computed: {
@@ -312,7 +333,6 @@ Write = {
                         "field7697_1": this.form.field7697_1,
                         "field7698_1": this.form.field7698_1,
                     }
-
                     projectList.map((item,index)=>{
                         let keys=[
                             "field11407",
@@ -340,10 +360,56 @@ Write = {
                             subMitData[_key]=item[key]
                         }
                     })
-                    console.log(subMitData)
-                    alert('submit!');
+                    let workflowid=Number(this._leftMenuTree[0].childs[0].key)
+                    let userId=Number(this._userInfo.userid)
+                    let param={
+                        ...subMitData,
+                        "workflowid": workflowid,
+                        "lastloginuserid": userId,
+                        "f_weaver_belongto_userid": userId,
+                        "field7670": userId,
+                        "20064_123_addrequest_submit_token": new Date().getTime(),
+                        "linkageUUID": creatUuid(),
+                    }
+                    console.log(param)
+                    write(param,'submitFormLoaidng',this).then(res=>{
+                        if(res.data.type=='SUCCESS'){
+                            this.$message({
+                                message: '提交成功',
+                                type: 'success'
+                            })
+                            this.$refs.form.resetFields()
+                            this.form.projectList=[]
+                        }else{
+                            this.$message({
+                                message: '提交出错了:'+res.data.type,
+                                type: 'success'
+                            })
+                        }
+                    }).catch(_=>{
+
+                    })
                 } else {
-                    console.log('error submit!!');
+                    this.$message({
+                        message: '请检查必填项目',
+                        type: 'success'
+                    })
+                    this.$nextTick(()=>{
+                        let errorElements=document.getElementsByClassName('is-error')
+                        let getTop=(element,target)=> {
+                            var realTop = element.offsetTop;
+                            var parent = element.offsetParent;
+                            while (target?parent!==target:parent !== null) {
+                                realTop += parent.offsetTop;
+                                parent = parent.offsetParent;
+                            }
+                            return realTop;
+                        }
+                        if(errorElements.length){
+                            let errorDom=errorElements[0]
+                            this.$refs.middle.scrollTop=getTop(errorDom,this.$refs.middle)
+                        }
+                    })
                     return false;
                 }
             });
@@ -391,7 +457,6 @@ Write = {
                     }
                     this.form.projectList.push(_data)
                 })
-
             }
 
             this.selectProject = false

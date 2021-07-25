@@ -261,13 +261,23 @@ app.component('loading', {
         'color': {
             type: String,
             default: '#0b59da'
+        },
+        size:{
+            default:18
+        },
+        space:{
+            default:5
+        },
+        position:{
+            default:'relative'
+            // default:'absolute'
         }
     },
     template: `
-	<div class="spinner">
-        <div class="one" :style="{backgroundColor:color}"></div>
-        <div class="two" :style="{backgroundColor:color}"></div>
-        <div class="three" :style="{backgroundColor:color}"></div>
+	<div class="spinner" :style="{width:size*3+space*2+'px'}">
+        <div class="one" :style="{backgroundColor:color,width:size+'px',height:size+'px',marginRight:space+'px'}"></div>
+        <div class="two" :style="{backgroundColor:color,width:size+'px',height:size+'px',marginRight:space+'px'}"></div>
+        <div class="three" :style="{backgroundColor:color,width:size+'px',height:size+'px'}"></div>
     </div> 
   `
 })

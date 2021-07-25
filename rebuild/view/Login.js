@@ -121,7 +121,6 @@ Login = {
                 this.isOneLogin=true
                 this.userInfo=userInfo
             }
-
         }
     },
     methods:{

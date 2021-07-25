@@ -163,7 +163,7 @@ async function get(url,param,loading,_this,method='get'){
                             message: '登录成功'
                         })
                         _app.init(true)
-                        if(location.pathname.search('^/login/')!==-1){
+                        if(location.pathname.search('/^/login//')!==-1){
                             _app.$router.replace('/write')
                         }
                     })
@@ -332,12 +332,12 @@ function write(param,loading,_this){
         "wfTestStr":""
     }
     let verify={
-        "workflowid": 123,
+        /*"workflowid": 123,
         "lastloginuserid": 20064,
         "f_weaver_belongto_userid": 20064,
         "field7670": 20064,
         "20064_123_addrequest_submit_token": 1626276900395,
-        "linkageUUID": "0FD9087674B6408A989B978F8B6FFA91",
+        "linkageUUID": "0FD9087674B6408A989B978F8B6FFA91",*/
         // "verifyRequiredRange": "field-9999,field7691_0,field7691_1,field7692_0,field7692_1,field7693_0,field7693_1,field7694_0,field7694_1,field7696_0,field7696_1,field11406_0,field11406_1",
         "verifyRequiredRange": "",
         // "existChangeRange": "field7703,field11406_0,field7705_0,field11407_0,field7691_0,field7692_0,field7693_0,field7694_0,field7703,field11406_1,field7705_1,field11407_1,field7691_1,field7692_1,field7693_1,field7694_1,field7703,field7696_0,field7696_1,field7697_0,field7697_1,field7698_1,field7698_0,field7695_1,field7695_0",
@@ -391,7 +391,7 @@ function write(param,loading,_this){
     param={
         ...fiexd,
         ...verify,
-        ...myForm,
+        // ...myForm,
         ...param
     }
     return post('api/workflow/reqform/requestOperation',param,loading,_this)

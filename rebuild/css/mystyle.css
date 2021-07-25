@@ -78,22 +78,22 @@
 
 /*加载中*/
 .spinner{
-    width: 64px;
+    /*width: 64px;*/
     margin: auto;
 }
 .spinner > div {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    /*width: 18px;
+    height: 18px;*/
     border-radius: 100%;
     -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
     animation: bouncedelay 1.4s infinite ease-in-out;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both
 }
-.spinner > div:not(:last-child){
+/*.spinner > div:not(:last-child){
     margin-right: 5px;
-}
+}*/
 .spinner .one {
     -webkit-animation-delay: -.32s;
     animation-delay: -.32s
@@ -178,6 +178,7 @@ table {
     margin-right: -10px;
 }
 .el_btn_beautiful{
+    min-height: 32px;
     padding: 9px 20px;
     min-width: 100px;
     text-align: center;
@@ -377,6 +378,7 @@ table {
     width: 20px;
     height: 20px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20px' height='20px'%3E %3Cpath fill-rule='evenodd' fill='rgb(197, 197, 197)' d='M3.000,8.000 C4.105,8.000 5.000,8.895 5.000,10.000 C5.000,11.105 4.105,12.000 3.000,12.000 C1.895,12.000 1.000,11.105 1.000,10.000 C1.000,8.895 1.895,8.000 3.000,8.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(197, 197, 197)' d='M17.000,8.000 C18.105,8.000 19.000,8.895 19.000,10.000 C19.000,11.105 18.105,12.000 17.000,12.000 C15.895,12.000 15.000,11.105 15.000,10.000 C15.000,8.895 15.895,8.000 17.000,8.000 Z'/%3E %3Cpath fill-rule='evenodd' fill='rgb(225, 225, 225)' d='M10.000,7.000 C11.657,7.000 13.000,8.343 13.000,10.000 C13.000,11.657 11.657,13.000 10.000,13.000 C8.343,13.000 7.000,11.657 7.000,10.000 C7.000,8.343 8.343,7.000 10.000,7.000 Z'/%3E %3C/svg%3E");
+    z-index: 1;
 }
 
 /*label*/
