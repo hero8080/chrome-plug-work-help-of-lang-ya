@@ -2,23 +2,41 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
-		<script src="popup.js"></script>
+		<title>popup</title>
+		<link rel="stylesheet" href="rebuild/ele/index.css">
+		<link rel="stylesheet" href="rebuild/css/layout.css">
+		<link rel="stylesheet" href="rebuild/css/mystyle.css">
+
+		<script src="rebuild/js/cache.js"></script>
+		<script src="rebuild/js/tool.js"></script>
 		<style>
-			.box{
-				width: 400px;
+			.popup{
+				width: 240px;
 				height:200px;
+				/*height:360px;*/
+				/*height:600px;*/
 				/* background-color: darkblue; */
 			}
 		</style>
 		
 	</head>
 	<body>
-		<div class="box" id="box">
-			popup
-		</div>
-		<div>
-			<a href="https://os.cntytz.com/s" target="_blank">开始写日志</a>
+		<div class="popup g_pad20" id="popup">
+			<div class="block_center g_img g_wid50_ah g_mar12t">
+				<svg
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						width="50px" height="50px">
+					<path fill-rule="evenodd"  fill="rgb(214, 200, 255)" d="M38,12h7c2.8,0,5,2.2,5,5v28c0,2.8-2.2,5-5,5h-7V12z"/>
+					<path fill-rule="evenodd"  fill="rgb(149, 123, 255)" d="M5,0h28c2.8,0,5,2.2,5,5v45H5c-2.8,0-5-2.2-5-5V5C0,2.2,2.2,0,5,0z"/>
+					<path fill-rule="evenodd"  fill="rgb(237, 231, 255)" d="M11,12l14.9,0c1.5,0,2.8,1,3.1,2.4c0.3,1.9-1.1,3.6-2.9,3.6l-14.9,0c-1.5,0-2.8-1-3.1-2.4C7.7,13.7,9.2,12,11,12z"/>
+					<path fill-rule="evenodd"  fill="rgb(237, 231, 255)" d="M11,24l14.9,0c1.5,0,2.8,1,3.1,2.4c0.3,1.9-1.1,3.6-2.9,3.6l-14.9,0c-1.5,0-2.8-1-3.1-2.4C7.7,25.7,9.2,24,11,24z"/>
+				</svg>
+			</div>
+			<p class="g_h14 text_center g_desc_color g_pad20tb">工作助手1.0.0</p>
+			<div class="text_center g_mar8t">
+				<a href="https://os.cntytz.com/s" target="_blank" class="el-button el-button--default el_btn_beautiful" ><span> 开始写日志 </span></a>
+			</div>
 		</div>
 		<script src="popup.js"></script>
 	</body>

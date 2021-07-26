@@ -38,63 +38,63 @@ Login = {
              d="M245.000,376.479 L251.343,396.390 C253.385,402.799 261.043,406.082 268.448,403.723 C275.853,401.364 280.201,394.256 278.159,387.847 L254.216,312.691 C252.916,308.611 249.337,305.806 245.000,304.909 L245.000,376.479 Z"/>
             </svg>
         </div>
-        <div class="flex1 flex_content_center login_right">
-            <div class="bw100 form">
-                
-                <template v-if="isOneLogin">
-                    <!--一键登录-->
-                    <div class="g_img block_center g_wid80_ah g_radius_all">
-                        <img :src="userInfo.icon" alt="">
-                    </div>
-                    <p class="text_center g_mar20t g_text2_color">{{userInfo.username}}</p>
-                </template>
-                <template v-else>
-                    <div class="g_img g_wid50_ah block_center">
-                       <svg 
+        <div class="flex1 flex_column login_right">
+            <div class="flex1 flex_content_center">
+                <div class="bw100 form">
+                    <template v-if="isOneLogin">
+                        <!--一键登录-->
+                        <div class="g_img block_center g_wid80_ah g_radius_all">
+                            <img :src="userInfo.icon" alt="">
+                        </div>
+                        <p class="text_center g_mar20t g_text2_color">{{userInfo.username}}</p>
+                    </template>
+                    <template v-else>
+                        <div class="g_img g_wid50_ah block_center">
+                          <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="50px" height="50px">
+                            <path fill-rule="evenodd"  fill="rgb(214, 200, 255)" d="M38,12h7c2.8,0,5,2.2,5,5v28c0,2.8-2.2,5-5,5h-7V12z"/>
+                            <path fill-rule="evenodd"  fill="rgb(149, 123, 255)" d="M5,0h28c2.8,0,5,2.2,5,5v45H5c-2.8,0-5-2.2-5-5V5C0,2.2,2.2,0,5,0z"/>
+                            <path fill-rule="evenodd"  fill="rgb(237, 231, 255)" d="M11,12l14.9,0c1.5,0,2.8,1,3.1,2.4c0.3,1.9-1.1,3.6-2.9,3.6l-14.9,0c-1.5,0-2.8-1-3.1-2.4C7.7,13.7,9.2,12,11,12z"/>
+                            <path fill-rule="evenodd"  fill="rgb(237, 231, 255)" d="M11,24l14.9,0c1.5,0,2.8,1,3.1,2.4c0.3,1.9-1.1,3.6-2.9,3.6l-14.9,0c-1.5,0-2.8-1-3.1-2.4C7.7,25.7,9.2,24,11,24z"/>
+                        </svg>
+                        </svg>
+                        </div>
+                        <p class="g_h18 g_desc_color text_center g_pad20t g_mar40b">
+                            欢迎登陆狼牙工作助手
+                        </p>
+                        <div class="input_item">
+                            <input class="bw100 g_pad12tb" autocomplete="new-password" v-model="form.userName" type="text" placeholder="账号">
+                            <i class="g_transition"></i>
+                        </div>
+                        <div class="g_mar20t  input_item">
+                            <input class="bw100 g_pad12tb" autocomplete="new-password" v-model="form.userpassword" type="password" placeholder="密码">
+                            <i class="g_transition"></i>
+                        </div>
+                        <div class="flex_center g_mar20t">
+                           <p class="flex1 g_desc_color g_h14">自动登录</p>
+                           <el-switch class="login_save_account" :class="{login_save_account_checked:saveAccount}" v-model="saveAccount" active-color="#13ce66" inactive-color="#e5e5e5"></el-switch>
+                        </div>
+                    </template>
+                    
+                    <div class="block_center g_wid50_ah g_mar60t g_pointer" @click="login">
+                        <loading v-if="loading"></loading>
+                        <svg 
+                         v-else
                          xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink"
                          width="50px" height="50px">
-                        <path fill-rule="evenodd"  fill="rgb(214, 200, 255)"
-                         d="M38.000,12.000 L45.000,12.000 C47.761,12.000 50.000,14.239 50.000,17.000 L50.000,45.000 C50.000,47.761 47.761,50.000 45.000,50.000 L38.000,50.000 L38.000,12.000 Z"/>
-                        <path fill-rule="evenodd"  fill="rgb(149, 123, 255)"
-                         d="M5.000,0.000 L33.000,0.000 C35.761,0.000 38.000,2.239 38.000,5.000 L38.000,50.000 L5.000,50.000 C2.239,50.000 -0.000,47.761 -0.000,45.000 L-0.000,5.000 C-0.000,2.239 2.239,0.000 5.000,0.000 Z"/>
-                        <path fill-rule="evenodd"  fill="rgb(237, 231, 255)"
-                         d="M12.000,15.000 L26.000,15.000 C27.657,15.000 29.000,16.343 29.000,18.000 C29.000,19.657 27.657,21.000 26.000,21.000 L12.000,21.000 C10.343,21.000 9.000,19.657 9.000,18.000 C9.000,16.343 10.343,15.000 12.000,15.000 Z"/>
-                        <path fill-rule="evenodd"  fill="rgb(237, 231, 255)"
-                         d="M12.000,28.000 L26.000,28.000 C27.657,28.000 29.000,29.343 29.000,31.000 C29.000,32.657 27.657,34.000 26.000,34.000 L12.000,34.000 C10.343,34.000 9.000,32.657 9.000,31.000 C9.000,29.343 10.343,28.000 12.000,28.000 Z"/>
+                        <path fill-rule="evenodd"  fill="rgb(247, 188, 93)"
+                         d="M25.000,0.000 C38.807,0.000 50.000,11.193 50.000,25.000 C50.000,38.807 38.807,50.000 25.000,50.000 C11.193,50.000 0.000,38.807 0.000,25.000 C0.000,11.193 11.193,0.000 25.000,0.000 Z"/>
+                        <path fill-rule="evenodd"  fill="rgb(55, 34, 0)"
+                         d="M32.989,25.554 C32.995,25.961 32.848,26.370 32.537,26.681 L26.656,32.562 C26.047,33.172 25.060,33.172 24.451,32.562 C23.842,31.953 23.842,30.966 24.451,30.357 L27.807,27.000 L18.500,27.000 C17.672,27.000 17.000,26.328 17.000,25.500 C17.000,24.672 17.672,24.000 18.500,24.000 L27.807,24.000 L24.451,20.643 C23.842,20.034 23.842,19.047 24.451,18.438 C25.060,17.828 26.047,17.828 26.656,18.438 L32.537,24.319 C32.848,24.630 32.995,25.039 32.989,25.446 C32.990,25.465 33.000,25.481 33.000,25.500 C33.000,25.519 32.990,25.535 32.989,25.554 Z"/>
                         </svg>
                     </div>
-                    <p class="g_h18 g_desc_color text_center g_pad20t g_mar40b">
-                        欢迎登陆狼牙工作助手
-                    </p>
-                    <div class="input_item">
-                        <input class="bw100 g_pad12tb" autocomplete="new-password" v-model="form.userName" type="text" placeholder="账号">
-                        <i class="g_transition"></i>
-                    </div>
-                    <div class="g_mar20t  input_item">
-                        <input class="bw100 g_pad12tb" autocomplete="new-password" v-model="form.userpassword" type="password" placeholder="密码">
-                        <i class="g_transition"></i>
-                    </div>
-                    <div class="flex_center g_mar20t">
-                       <p class="flex1 g_desc_color g_h14">自动登录</p>
-                       <el-switch class="login_save_account" :class="{login_save_account_checked:saveAccount}" v-model="saveAccount" active-color="#13ce66" inactive-color="#e5e5e5"></el-switch>
-                    </div>
-                </template>
-                
-                <div class="block_center g_wid50_ah g_mar60t" @click="login">
-                    <loading v-if="loading"></loading>
-                    <svg 
-                     v-else
-                     xmlns="http://www.w3.org/2000/svg"
-                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                     width="50px" height="50px">
-                    <path fill-rule="evenodd"  fill="rgb(247, 188, 93)"
-                     d="M25.000,0.000 C38.807,0.000 50.000,11.193 50.000,25.000 C50.000,38.807 38.807,50.000 25.000,50.000 C11.193,50.000 0.000,38.807 0.000,25.000 C0.000,11.193 11.193,0.000 25.000,0.000 Z"/>
-                    <path fill-rule="evenodd"  fill="rgb(55, 34, 0)"
-                     d="M32.989,25.554 C32.995,25.961 32.848,26.370 32.537,26.681 L26.656,32.562 C26.047,33.172 25.060,33.172 24.451,32.562 C23.842,31.953 23.842,30.966 24.451,30.357 L27.807,27.000 L18.500,27.000 C17.672,27.000 17.000,26.328 17.000,25.500 C17.000,24.672 17.672,24.000 18.500,24.000 L27.807,24.000 L24.451,20.643 C23.842,20.034 23.842,19.047 24.451,18.438 C25.060,17.828 26.047,17.828 26.656,18.438 L32.537,24.319 C32.848,24.630 32.995,25.039 32.989,25.446 C32.990,25.465 33.000,25.481 33.000,25.500 C33.000,25.519 32.990,25.535 32.989,25.554 Z"/>
-                    </svg>
+                     
                 </div>
             </div>
+            <p class="text_center g_desc_color g_h14 g_pointer" v-if="isOneLogin" @click="isOneLogin=false">切换用户</p>
         </div>
     </div>
 </div>
@@ -144,7 +144,7 @@ Login = {
                     //保存用户名和密码
                     cache('account',JSON.stringify(this.form))
                     this.$root.init()
-                    this.$router.replace('/write')
+                    this.$router.replace('/write/')
 
                 }
                 this.$message(res.msg)

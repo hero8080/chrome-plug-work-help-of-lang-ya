@@ -15,24 +15,24 @@ function cache(key,value,expire){
 }
 //设置数据
 function setLocalData(key,value,expire){
-    localStorage.setItem(key, value)
+    window.localStorage.setItem(key, value)
     if(expire){
-        localStorage.setItem(key+'_expire', createTime()+expire)
+        window.localStorage.setItem(key+'_expire', createTime()+expire)
     }
 
 }
 //获取数据
 function getLocalData(key){
-    let oldexpire=localStorage.getItem(key+'_expire')
+    let oldexpire=window.localStorage.getItem(key+'_expire')
     let newexpire=createTime()
     if(oldexpire&&oldexpire-newexpire<0){
         //已过期
-        localStorage.removeItem(key)
-        localStorage.removeItem(key+'_expire')
+        window.localStorage.removeItem(key)
+        window.localStorage.removeItem(key+'_expire')
         return false
     }else{
         //在有效期内
-        let data=localStorage.getItem(key)
+        let data=window.localStorage.getItem(key)
         try {
             return JSON.parse(data)
         }catch (_){

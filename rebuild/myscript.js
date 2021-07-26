@@ -65,7 +65,7 @@ document.body.innerHTML = `
                     <div class="g_img g_radius_all header_img">
                         <img :src="userInfo.icon" alt="">
                     </div>
-                    <div class="g_pad12l">
+                    <div class="g_pad12l flex1">
                         <p class="g_text_color g_h21 g_mar8b">{{welcome}}，{{userInfo.username}}，祝你开心每一天</p>
                         <p class="g_text2_color g_h14">{{userInfo.jobs}} | {{userInfo.deptname}}－{{userInfo.subcompanyname}}</p>
                     </div>

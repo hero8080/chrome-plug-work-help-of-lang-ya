@@ -164,15 +164,15 @@ async function get(url,param,loading,_this,method='get'){
                         })
                         _app.init(true)
                         if(location.pathname.search('/^/login//')!==-1){
-                            _app.$router.replace('/write')
+                            _app.$router.replace('/write/')
                         }
                     })
                 }else{
                     //跳转至登录页面
-                    _this.$message({
-                        message: result.msg,
+                    /*_this.$message({
+                        message: res.msg,
                         type: 'warning'
-                    })
+                    })*/
                     _app.$router.replace('/login')
                 }
             }else{

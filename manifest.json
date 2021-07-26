@@ -1,13 +1,13 @@
 {
 	// 必须的字段
-	"name": "狼牙技术工作助手",
+	"name": "工作助手",
 	"version": "1.0.0",
 	"manifest_version": 2,
 
 	"browser_action": {
 		"default_icon": "icons/icon.png",
 		// 图标悬停时的标题，可选
-		"default_title": "欢迎使用狼牙科技日志插件"
+		"default_title": "工作助手"
 		 ,"default_popup": "popup.html"
 	},
 	"permissions": [
@@ -16,6 +16,12 @@
 	"background": {
 		"scripts": ["background.js"],
 		"persistent": false
+	},
+	"icons": {
+		"128": "icons/128.png",
+		"48": "icons/48.png",
+		"32": "icons/16.png",
+		"16": "icons/16.png"
 	},
 	"content_scripts": [{
 			"matches": ["https://os.cntytz.com/*"],
@@ -49,5 +55,4 @@
 			"run_at": "document_end"
 		}
 	]
-
 }
