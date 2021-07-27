@@ -286,6 +286,20 @@ function getConfig(param,loading,_this){
     }
     return post('api/workflow/secondauth/getSecondAuthConfig',param,loading,_this)
 }
+//获取form
+function loadFrom(loading,_this){
+    let param={
+        beagenter: 0,
+        f_weaver_belongto_userid:'',
+        f_weaver_belongto_usertype: 0,
+        isagent: 0,
+        iscreate: 1,
+        menuIds: '1,12',
+        menuPathIds: '1,12',
+        workflowid: 123
+    }
+    return post('api/workflow/reqform/loadForm',param,loading,_this)
+}
 //提交日志
 function write(param,loading,_this){
     let fiexd={
@@ -326,8 +340,8 @@ function write(param,loading,_this){
         "field7671": 7,
         "field7672": 68,
         "field-10":"",
-        "signatureAttributesStr": "YmVhZ2VudGVyPTB8Y29uZmlnaWQ9LTF8aXNhZ2VudD0wfA==",
-        "signatureSecretKey": "481c0142389a9f3911d7c0326a64889b",
+        // "signatureAttributesStr": "YmVhZ2VudGVyPTB8Y29uZmlnaWQ9LTF8aXNhZ2VudD0wfA==",
+        // "signatureSecretKey": "481c0142389a9f3911d7c0326a64889b",
         "selectNextFlow": 0,
         "wfTestStr":""
     }

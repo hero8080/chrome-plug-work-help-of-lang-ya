@@ -371,24 +371,29 @@ Write = {
                         "20064_123_addrequest_submit_token": new Date().getTime(),
                         "linkageUUID": creatUuid(),
                     }
-                    console.log(param)
-                    write(param,'submitFormLoaidng',this).then(res=>{
-                        if(res.data.type=='SUCCESS'){
-                            this.$message({
-                                message: '提交成功',
-                                type: 'success'
-                            })
-                            this.$refs.form.resetFields()
-                            this.form.projectList=[]
-                        }else{
-                            this.$message({
-                                message: '提交出错了:'+res.data.type,
-                                type: 'success'
-                            })
-                        }
-                    }).catch(_=>{
+                    // console.log(param)
+                    loadFrom().then(_form=>{
+                        param.signatureSecretKey=_form.params.signatureSecretKey
+                        param.signatureAttributesStr=_form.params.signatureAttributesStr
+                        write(param,'submitFormLoaidng',this).then(res=>{
+                            if(res.data.type=='SUCCESS'){
+                                this.$message({
+                                    message: '提交成功',
+                                    type: 'success'
+                                })
+                                this.$refs.form.resetFields()
+                                this.form.projectList=[]
+                            }else{
+                                this.$message({
+                                    message: '提交出错了:'+res.data.type,
+                                    type: 'success'
+                                })
+                            }
+                        }).catch(_=>{
 
+                        })
                     })
+
                 } else {
                     this.$message({
                         message: '请检查必填项目',
