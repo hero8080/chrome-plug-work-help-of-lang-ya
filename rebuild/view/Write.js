@@ -210,8 +210,8 @@ Write = {
             isBlocViewkModel: true,
             projectListLoading:true,
             form: {
-                requestname: '工作日报与计划-周章锋-2021-07-16',
-                field7673: '2021-07-16',
+                requestname: '',
+                field7673: '',
                 projectList: [],
                 field7696_1:'',
                 field7697_1:'',
@@ -386,6 +386,7 @@ Write = {
                                 })
                                 this.$refs.form.resetFields()
                                 this.form.projectList=[]
+                                this.initFormData()
                             }else{
                                 this.$message({
                                     message: '提交出错了:'+res.data.type,

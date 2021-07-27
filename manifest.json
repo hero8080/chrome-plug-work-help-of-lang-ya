@@ -17,6 +17,7 @@
 		"scripts": ["background.js"],
 		"persistent": false
 	},
+	"key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh2ppSnnSlrEA2UmtsKxuMMXROZtqSuvWOUPAkQ0z0LWYRwa7v7VzDW3nbTrlCZkfztIlcSU3Oq8TnL/ie5JyNAol4gnjamkNCgbpNQGYtICkbNv2abZz/iCun+ela83gMk45XvbpVo2yxDxsH5JmUgDp9fXF942RM4zSULZxRcs7HH1IBHjeAASukUppsd17kywFrkLpEfItkq6gKFkgaxFeWEgF1gB5bTJQ1USNqTzsKvzdWRBbxhFSbSGrWpZMmo+7TXzgKXfSEQz7BrPvDrZkLeAIVz2sTQrUV9l4/r6dfXXrJ0sAIgs/x6hbJ57IXNfVKzFpOAxkbXvn5o11zwIDAQAB",
 	"icons": {
 		"128": "icons/128.png",
 		"48": "icons/48.png",

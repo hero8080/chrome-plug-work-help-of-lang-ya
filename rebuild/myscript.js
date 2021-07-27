@@ -79,14 +79,7 @@ const vueApp = {
     data() {
         return {
             isLogin:false,
-            activeMenu:(()=>{
-                let allRoutePath=routes.map(item=>item.path)
-                let routeIndex=allRoutePath.indexOf(location.pathname)
-                if(routeIndex==-1){
-                    routeIndex=1
-                }
-                return routeIndex
-            })(),
+            activeMenu:null,
             defaultIcon: {
                 linener: ['#aab5cb', '#aab5cb'],
                 light: '#cdd4e2',
@@ -128,8 +121,23 @@ const vueApp = {
     },
     created(){
         this.init()
+        this.initRoute()
     },
     methods:{
+        initRoute(){
+            let allRoutePath=routes.map(item=>item.path)
+            let pathName=location.pathname
+
+            if(pathName[pathName.length-1]=='/'){
+                pathName=pathName.substr(0,pathName.length-1)
+            }
+
+            let routeIndex=allRoutePath.indexOf(pathName)
+            if(routeIndex==-1){
+                routeIndex=1
+            }
+            this.activeMenu=routeIndex
+        },
         init(isReload=false){
             let loadStatus=0
             let userInfo={}

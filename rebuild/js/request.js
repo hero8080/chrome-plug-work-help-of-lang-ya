@@ -163,8 +163,8 @@ async function get(url,param,loading,_this,method='get'){
                             message: '登录成功'
                         })
                         _app.init(true)
-                        if(location.pathname.search('/^/login//')!==-1){
-                            _app.$router.replace('/write/')
+                        if(location.pathname.search('/^/login')!==-1){
+                            _app.$router.replace('/write')
                         }
                     })
                 }else{
@@ -189,7 +189,7 @@ function post(url,param,loading,_this){
    return get(url,param,loading,_this,'post')
 }
 //登录
-function  login(param,loading,_this){
+function login(param,loading,_this){
     let _param={
         islanguid: 7,
         loginid: param.userName,
