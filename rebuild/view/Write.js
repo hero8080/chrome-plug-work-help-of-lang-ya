@@ -160,6 +160,7 @@ Write = {
                         @click="isBlocViewkModel=!isBlocViewkModel"></div>
                     </div>
                     <div class="flex1 g_scroll_y">
+                        <loading v-if="projectListLoading"></loading>
                         <div class="g_col_4_16 g_mar16b_s g_scroll_width" v-if="isBlocViewkModel">
                             <div v-for="item in projectSelecData" class="g_pad20 pro_list g_pointer g_radius4"
                             :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
@@ -207,6 +208,7 @@ Write = {
             projectSelectIndex: 0,
             projectUserSelect: null,
             isBlocViewkModel: true,
+            projectListLoading:true,
             form: {
                 requestname: '工作日报与计划-周章锋-2021-07-16',
                 field7673: '2021-07-16',
@@ -305,6 +307,7 @@ Write = {
                             item.xm = this.clearHtmlTag(item.xm)
                             return item
                         })
+                        this.projectListLoading=false
                         console.log(this.projectList)
                         let projectType = this.projectList.map(item => {
                             return item.xmmc
