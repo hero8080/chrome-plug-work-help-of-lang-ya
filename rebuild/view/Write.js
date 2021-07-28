@@ -254,6 +254,7 @@ Write = {
     },
     watch: {
         _isGetData(data) {
+            this.initFormData()
             data && this.getProject(()=>{
                 this.initFormData()
             })
@@ -261,6 +262,7 @@ Write = {
     },
     created() {
         if (this._isGetData) {
+            this.initFormData()
             this.getProject(()=>{
                 this.initFormData()
             })
