@@ -254,14 +254,16 @@ Write = {
     },
     watch: {
         _isGetData(data) {
-            data && this.getProject()
-            this.initFormData()
+            data && this.getProject(()=>{
+                this.initFormData()
+            })
         }
     },
     created() {
         if (this._isGetData) {
-            this.getProject()
-            this.initFormData()
+            this.getProject(()=>{
+                this.initFormData()
+            })
         }
     },
     methods: {
@@ -280,7 +282,7 @@ Write = {
         clearHtmlTag(str) {
             return str.replace(/<\/?.+?\/?>/g, '').replace(/&nbsp;/ig, '')
         },
-        getProject() {
+        getProject(callback) {
             let columns = []
             let projectList = []
             let pageTotal = 0
@@ -327,6 +329,7 @@ Write = {
                         }).filter((item, index, data) => data.indexOf(item) == index)
                         projectType.unshift('全部项目')
                         this.projectType = projectType
+                        callback&&callback()
                         // write()
                     }
                 })

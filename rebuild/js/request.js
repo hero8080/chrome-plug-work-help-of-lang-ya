@@ -163,7 +163,8 @@ async function get(url,param,loading,_this,method='get'){
                             message: '登录成功'
                         })
                         _app.init(true)
-                        if(location.pathname.search('/^/login')!==-1){
+                        console.log(location.pathname)
+                        if(location.pathname.search(/^\/login/)!==-1){
                             _app.$router.replace('/write')
                         }
                     })

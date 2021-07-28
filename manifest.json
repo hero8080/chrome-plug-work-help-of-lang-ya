@@ -33,10 +33,10 @@
   "content_scripts": [
     {
       "matches": [
-        "https://os.cntytz.com/login",
-        "https://os.cntytz.com/note",
-        "https://os.cntytz.com/write",
-        "https://os.cntytz.com/view"
+        "https://os.cntytz.com/login*",
+        "https://os.cntytz.com/note*",
+        "https://os.cntytz.com/write*",
+        "https://os.cntytz.com/view*"
       ],
       "css": [
         "rebuild/ele/index.css",
