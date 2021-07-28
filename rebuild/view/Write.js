@@ -155,6 +155,7 @@ Write = {
                             <p class="g_h18">{{projectType[projectSelectIndex]}}</p>
                             <p class="g_h14 g_pad8t g_text2_color" v-if="!isChangePro">按住ctrl键可多选项目</p>
                         </div>
+                        <el-input class="search_input" v-model="searchWord" placeholder="请输入项目名称/拼音/首字母"></el-input>
                         <div 
                         class="g_mar8r g_wid30_ah svg_icon g_text2_bgcolor g_pointer"
                         :class="isBlocViewkModel?'svg_icon_list':'svg_icon_block'" 
@@ -193,7 +194,7 @@ Write = {
                         </div>
                     </div>
                     <div class="text_center g_mar40b g_pad20t">
-                        <el-button class="el_btn_beautiful" @click="selectProjectNext">{{isChangePro?'确认切换项目':'下一步'}}</el-button>
+                        <el-button class="el_btn_beautiful" @click="selectProjectNext">{{isChangePro?'确认切换项目':'下一步'}}{{searchWord}}</el-button>
                     </div>
                 </div>
             </model>
@@ -210,6 +211,7 @@ Write = {
             projectUserSelect: null,
             isBlocViewkModel: true,
             projectListLoading:true,
+            searchWord:'',
             form: {
                 requestname: '',
                 field7673: '',
@@ -241,7 +243,13 @@ Write = {
         projectSelecData() {
             let projectType = this.projectType[this.projectSelectIndex]
             let projectSelectIndex = this.projectSelectIndex
-            return this.projectList.filter((item, index) => projectSelectIndex == 0 ? true : item.xmmc == projectType)
+            let projectListFilter=this.projectList.filter((item, index) => projectSelectIndex == 0 ? true : item.xmmc == projectType)
+            let searchWord=this.searchWord
+            if(searchWord){
+                let _RegExp=new RegExp(searchWord,'ig')
+                return projectListFilter.filter(item=>item.xmmk.search(_RegExp)!==-1||item.easyName.search(_RegExp)!==-1||item.fullName.search(_RegExp)!==-1)
+            }
+            return projectListFilter
         }
     },
     watch: {
@@ -307,6 +315,8 @@ Write = {
                             item.tbr = this.clearHtmlTag(item.tbr)
                             item.xm = this.clearHtmlTag(item.xm)
                             item.img= chrome.extension.getURL('pro_icon/'+item.id+'.png')
+                            item.fullName = pinyin.getFullChars(item.xmmk);
+                            item.easyName = pinyin.getCamelChars(item.xmmk);
                             return item
                         })
                         this.projectListLoading=false

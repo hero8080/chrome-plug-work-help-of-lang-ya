@@ -64,6 +64,8 @@
         "rebuild/ele/index.full.js",
         //数据请求
         "rebuild/js/request.js",
+        //拼音插件
+        "rebuild/js/convert_pinyin.js",
         //主脚本
         "rebuild/myscript.js"
       ],
