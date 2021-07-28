@@ -131,7 +131,6 @@ const vueApp = {
             if(pathName[pathName.length-1]=='/'){
                 pathName=pathName.substr(0,pathName.length-1)
             }
-
             let routeIndex=allRoutePath.indexOf(pathName)
             if(routeIndex==-1){
                 routeIndex=1
