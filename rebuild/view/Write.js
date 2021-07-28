@@ -20,7 +20,8 @@ Write = {
                                    <fieldset>
                                    <legend class="g_h14 g_desc_color">项目{{index+1}}-{{item.xmmk}}</legend>
                                    <div class="g_pad20b g_pad4t form_pro_list flex_center">
-                                       <div class="g_img g_radius4 g_wid60_ah g_form_select_active_bgcolor">
+                                       <div class="g_img g_radius4 g_wid50_ah">
+                                        <img :src="item.img" alt="">
                                         </div>
                                         <div class="flex1 g_pad12l">
                                             <p class="bold">{{item.xmmk}}</p>
@@ -165,8 +166,8 @@ Write = {
                             <div v-for="item in projectSelecData" class="g_pad20 pro_list g_pointer g_radius4"
                             :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
                             >
-                                <div class="g_img g_radius4 g_wid60_ah g_form_select_active_bgcolor block_center">
-                                
+                                <div class="g_img g_radius4 g_wid60_ah block_center">
+                                    <img :src="item.img" alt="">
                                 </div>
                                 <p class="text_center g_pad20t desc">{{item.xmmk}}</p>
 <!--                            {{item}}-->
@@ -177,8 +178,8 @@ Write = {
                             <div v-for="item in projectSelecData" class="g_pad20 pro_list flex_center g_pointer g_radius4"
                             :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
                             >
-                                <div class="g_img g_radius4 g_wid60_ah g_form_select_active_bgcolor">
-                                
+                                <div class="g_img g_radius4 g_wid50_ah">
+                                    <img :src="item.img" alt="">
                                 </div>
                                 <div class="flex1 g_pad12l">
                                     <p class="bold">{{item.xmmk}}</p>
@@ -305,6 +306,7 @@ Write = {
                         }).map(item => {
                             item.tbr = this.clearHtmlTag(item.tbr)
                             item.xm = this.clearHtmlTag(item.xm)
+                            item.img= chrome.extension.getURL('pro_icon/'+item.id+'.png')
                             return item
                         })
                         this.projectListLoading=false

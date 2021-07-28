@@ -1,63 +1,104 @@
 {
-	// 必须的字段
-	"name": "工作助手",
-	"version": "1.0.0",
-	"manifest_version": 2,
-
-	"browser_action": {
-		"default_icon": "icons/icon.png",
-		// 图标悬停时的标题，可选
-		"default_title": "工作助手"
-		 ,"default_popup": "popup.html"
-	},
-	"permissions": [
-		"tabs", "activeTab", "notifications", "background","http://os.cntytz.com/","https://os.cntytz.com/"
-	],
-	"background": {
-		"scripts": ["background.js"],
-		"persistent": false
-	},
-	"icons": {
-		"128": "icons/128.png",
-		"48": "icons/48.png",
-		"32": "icons/16.png",
-		"16": "icons/16.png"
-	},
-	"content_scripts": [{
-			"matches": [
-				"https://os.cntytz.com/login",
-				"https://os.cntytz.com/note",
-				"https://os.cntytz.com/write",
-				"https://os.cntytz.com/view"
-			],
-			"css": ["rebuild/ele/index.css","rebuild/css/layout.css","rebuild/css/mystyle.css"],
-			"js": [
-				//加密解密
-				"rebuild/js/jsencrypt.min.js",
-				//缓存插件
-				"rebuild/js/cache.js",
-				//工具箱
-				"rebuild/js/tool.js",
-
-				//vue插件
-				"rebuild/js/vue.global.js",
-				"rebuild/js/vuex.global.js",
-				"rebuild/js/vue-router.js",
-				//页面
-				"rebuild/view/Login.js",
-				"rebuild/view/Note.js",
-				"rebuild/view/View.js",
-				"rebuild/view/Write.js",
-				//路由
-				"rebuild/view/router.js",
-				//element插件
-				"rebuild/ele/index.full.js",
-				//数据请求
-				"rebuild/js/request.js",
-				//主脚本
-				"rebuild/myscript.js"
-			],
-			"run_at": "document_end"
-		}
-	]
+  // 必须的字段
+  "name": "工作助手",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    // 图标悬停时的标题，可选
+    "default_title": "工作助手",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "background",
+    "http://os.cntytz.com/",
+    "https://os.cntytz.com/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "128": "icons/128.png",
+    "48": "icons/48.png",
+    "32": "icons/16.png",
+    "16": "icons/16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://os.cntytz.com/login",
+        "https://os.cntytz.com/note",
+        "https://os.cntytz.com/write",
+        "https://os.cntytz.com/view"
+      ],
+      "css": [
+        "rebuild/ele/index.css",
+        "rebuild/css/layout.css",
+        "rebuild/css/mystyle.css"
+      ],
+      "js": [
+        //加密解密
+        "rebuild/js/jsencrypt.min.js",
+        //缓存插件
+        "rebuild/js/cache.js",
+        //工具箱
+        "rebuild/js/tool.js",
+        //vue插件
+        "rebuild/js/vue.global.js",
+        "rebuild/js/vuex.global.js",
+        "rebuild/js/vue-router.js",
+        //页面
+        "rebuild/view/Login.js",
+        "rebuild/view/Note.js",
+        "rebuild/view/View.js",
+        "rebuild/view/Write.js",
+        //路由
+        "rebuild/view/router.js",
+        //element插件
+        "rebuild/ele/index.full.js",
+        //数据请求
+        "rebuild/js/request.js",
+        //主脚本
+        "rebuild/myscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "pro_icon/67.png",
+    "pro_icon/68.png",
+    "pro_icon/69.png",
+    "pro_icon/70.png",
+    "pro_icon/71.png",
+    "pro_icon/72.png",
+    "pro_icon/73.png",
+    "pro_icon/74.png",
+    "pro_icon/75.png",
+    "pro_icon/76.png",
+    "pro_icon/77.png",
+    "pro_icon/78.png",
+    "pro_icon/79.png",
+    "pro_icon/80.png",
+    "pro_icon/81.png",
+    "pro_icon/82.png",
+    "pro_icon/83.png",
+    "pro_icon/84.png",
+    "pro_icon/85.png",
+    "pro_icon/86.png",
+    "pro_icon/87.png",
+    "pro_icon/88.png",
+    "pro_icon/89.png",
+    "pro_icon/90.png",
+    "pro_icon/91.png",
+    "pro_icon/92.png",
+    "pro_icon/93.png",
+    "pro_icon/94.png",
+    "pro_icon/95.png"
+  ]
 }
