@@ -176,7 +176,7 @@ Write = {
                             </div>
                         </div>
                         <div class="g_col_3_16 g_mar16b_s g_scroll_width" v-else>
-                            <div v-for="item in projectSelecData" class="g_pad20 pro_list flex_center g_pointer g_radius4"
+                            <div v-for="item in projectSelecData" class="g_pad24 pro_list flex_center g_pointer g_radius4"
                             :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
                             >
                                 <div class="g_img g_radius4 g_wid50_ah">
@@ -255,13 +255,13 @@ Write = {
     watch: {
         _isGetData(data) {
             data && this.getProject()
-            this.initFormData()
         }
     },
     created() {
         if (this._isGetData) {
             this.getProject()
         }
+        this.initFormData()
     },
     methods: {
         getDate(){
