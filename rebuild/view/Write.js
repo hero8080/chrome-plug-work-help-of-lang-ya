@@ -255,13 +255,14 @@ Write = {
     watch: {
         _isGetData(data) {
             data && this.getProject()
+            this.initFormData()
         }
     },
     created() {
         if (this._isGetData) {
             this.getProject()
+            this.initFormData()
         }
-        this.initFormData()
     },
     methods: {
         getDate(){
