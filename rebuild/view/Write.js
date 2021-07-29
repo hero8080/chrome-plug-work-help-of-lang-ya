@@ -227,7 +227,7 @@ Write = {
                                     </div>
                                 </div>
                             </div>
-                            <div class="g_scroll_width  recent_line g_mar20b"></div>
+                            <div v-if="recentRecord.length" class="g_scroll_width  recent_line g_mar20b"></div>
                         </div>
                         <loading v-if="projectListLoading"></loading>
                         <div class="g_col_4_16 g_mar16b_s g_scroll_width" v-if="isBlocViewkModel">
