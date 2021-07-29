@@ -371,8 +371,8 @@ function write(param,loading,_this){
         "detailFieldUnEmptyCount": 22,
     }
     let myForm={
-        "requestname": "工作日报与计划-周章锋-2021-07-16",
-        "field7673": "2021-07-16",
+        /*"requestname": "工作日报与计划-周章锋-2021-07-16",
+        "field7673": "2021-07-16",*/
 
         "field11407_0": "智慧工地",
         "field11406_0": 81,
