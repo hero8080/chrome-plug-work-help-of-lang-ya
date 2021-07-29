@@ -339,7 +339,7 @@ function write(param,loading,_this){
         "isFirstSubmit":"",
         "requestlevel": 0,
         "field7671": 7,
-        "field7672": 68,
+        // "field7672": 68,
         "field-10":"",
         // "signatureAttributesStr": "YmVhZ2VudGVyPTB8Y29uZmlnaWQ9LTF8aXNhZ2VudD0wfA==",
         // "signatureSecretKey": "481c0142389a9f3911d7c0326a64889b",

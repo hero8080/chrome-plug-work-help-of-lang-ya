@@ -194,7 +194,7 @@ Write = {
                         </div>
                     </div>
                     <div class="text_center g_mar40b g_pad20t">
-                        <el-button class="el_btn_beautiful" @click="selectProjectNext">{{isChangePro?'确认切换项目':'下一步'}}{{searchWord}}</el-button>
+                        <el-button class="el_btn_beautiful" @click="selectProjectNext">{{isChangePro?'确认切换项目':'下一步'}}</el-button>
                     </div>
                 </div>
             </model>
@@ -255,16 +255,20 @@ Write = {
     watch: {
         _isGetData(data) {
             this.initFormData()
+            console.log(this._userInfo)
             data && this.getProject(()=>{
                 this.initFormData()
             })
         }
     },
     created() {
+
         if (this._isGetData) {
+            console.log(this._userInfo)
             this.initFormData()
             this.getProject(()=>{
                 this.initFormData()
+
             })
         }
     },
@@ -391,6 +395,7 @@ Write = {
                         "field7670": userId,
                         "20064_123_addrequest_submit_token": new Date().getTime(),
                         "linkageUUID": creatUuid(),
+                        "field7672":this._userInfo.deptid
                     }
                     // console.log(param)
                     loadFrom().then(_form=>{
