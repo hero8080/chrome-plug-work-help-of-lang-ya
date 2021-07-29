@@ -1,6 +1,6 @@
 // 重置网页内容
 function setHead() {
-    document.head.innerHTML = '<title>欢迎使用狼牙科技日志插件</title>'
+    document.head.innerHTML = '<title>欢迎使用琅玡科技日志插件</title>'
 }
 function resetHead() {
     document.head.innerHTML = ''
