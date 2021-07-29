@@ -481,9 +481,10 @@ Write = {
                                     message: '提交成功',
                                     type: 'success'
                                 })
-                                this.$refs.form.resetFields()
+                                this.$router.replace('/view')
+                                /*this.$refs.form.resetFields()
                                 this.form.projectList=[]
-                                this.initFormData()
+                                this.initFormData()*/
                             }else{
                                 this.$message({
                                     message: '提交出错了:'+res.data.type,

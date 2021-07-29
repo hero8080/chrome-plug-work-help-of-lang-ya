@@ -11,6 +11,10 @@ View = {
                           :prop="item.dbField+'span'"
                           :label="item.title"
                           >
+                          <template #default="{row}" v-if="item.dbField=='requestname'">
+                            <span>{{ row.requestname }}</span>
+                            <span class="g_mar4l _label _labe_green" v-if="row.isTodayDate">今日已完成</span>
+                          </template>
                         </el-table-column>
                     </el-table>
                     <div class="text_right g_pad8tb flex_center flex_right el_pagination" v-if="page.count>0">
@@ -40,6 +44,13 @@ View = {
     methods:{
         clearHtmlTag(str){
             return str.replace(/<\/?.+?\/?>/g,'')
+        },
+        getDate(){
+            let date=new Date()
+            let add0=(num,prefix='')=>{
+                return num<10?prefix+'0'+num:prefix+num
+            }
+            return add0(date.getFullYear())+add0(date.getMonth()+1,'-')+add0(date.getDate(),'-')
         },
         init(){
             /*getLeftMenu().then(leftTree=>{
@@ -77,10 +88,20 @@ View = {
             getViewList({dataKey:dataKey,current:this.page.pageNum}).then(listData=>{
                 this.loading=false
                 this.tableData=listData.datas
+                let todayDate=this.getDate()
                 this.tableData.map(item=>{
                     for(key in item){
                         item[key]=this.clearHtmlTag(item[key])
                     }
+                    try{
+                        let requestNameDate = item.requestname.match(/\d+/g).slice(-3)
+                        if(requestNameDate&&requestNameDate.length>=3){
+                            item.isTodayDate=requestNameDate.join('-')==todayDate
+                        }
+                    }catch (e){
+                        item.isTodayDate=false
+                    }
+
                 })
                 this.columns=listData.columns.filter(item=>item.display=='true'&&item.title!=='系统名称'&&item.title!=='未操作者')
             }).catch(error=>{

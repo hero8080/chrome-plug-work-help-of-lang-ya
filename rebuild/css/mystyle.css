@@ -405,7 +405,7 @@ table {
 }
 
 /*label*/
-.label span {
+.label span,._label {
     display: inline-block;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -421,17 +421,21 @@ table {
 .label span:not(:last-child) {
     margin-right: 5px;
 }
-.label .purple {
+.label .purple,._labe_purple {
     color: #722ed1;
     background: #f9f0ff;
     border-color: #d3adf7;
 }
-.label .blue {
+.label .blue,._labe_blue {
     color: #1890ff;
     background: #e6f7ff;
     border-color: #91d5ff;
 }
-
+.label .green,._labe_green{
+    color: #069366;
+    background: #e6f7ff;
+    border-color: #93e7cc;
+}
 /*model*/
 .mask{
     width: 0;
