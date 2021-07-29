@@ -45,25 +45,56 @@ Write = {
                                                 <p class="flex1">完成度</p>
                                                 <p>{{item.field7693}}%</p>
                                             </div>
-                                            <el-form-item 
-                                                :key="item.key"
-                                                :prop="'projectList.' + index + '.field7693'"
-                                              >
-                                            <el-slider :step="2" v-model="item.field7693"></el-slider>
-                                            </el-form-item>
                                       </div>
+                                      <div class="flex_center">
+                                          <div class="slider">
+                                            <el-form-item 
+                                                    :key="item.key"
+                                                    :prop="'projectList.' + index + '.field7693'"
+                                                  >
+                                                <el-slider :step="2" v-model="item.field7693"></el-slider>
+                                                </el-form-item>
+                                            </div>
+                                            <div class="flex1"></div>
+                                            <!--<div class="flex1">
+                                            <el-form-item 
+                                                    :key="item.key"
+                                                    :prop="'projectList.' + index + '.field7693'"
+                                                  >
+                                                <el-input v-model="item.field7693" placeholder="请输入"></el-input>
+                                                </el-form-item>
+                                            </div>-->
+                                      </div>
+                                      
                                        <div class="slider">
                                             <div class="flex_center g_h14 g_cancel_color">
                                                 <p class="flex1">工时</p>
                                                 <p>{{item.field7694}}小时</p>
                                             </div>
-                                            <el-form-item 
-                                                :key="item.key"
-                                                :prop="'projectList.' + index + '.field7694'"
-                                              >
-                                            <el-slider :step="1" show-stops v-model="item.field7694" :max="12"></el-slider>
-                                            </el-form-item>
+                                            
                                       </div>
+                                      
+                                       <div class="flex_center">
+                                              <div class="slider">
+                                                    <el-form-item 
+                                                        :key="item.key"
+                                                        :prop="'projectList.' + index + '.field7694'"
+                                                      >
+                                                        <el-slider :step="1" show-stops v-model="item.field7694" :max="12"></el-slider>
+                                                    </el-form-item>
+                                                    </div>
+                                                    <div class="flex1"></div>
+                                                    <!--<div class="flex1">
+                                                        <el-form-item 
+                                                            :key="item.key"
+                                                            :prop="'projectList.' + index + '.field7694'"
+                                                          >
+                                                        <el-input v-model="item.field7694" placeholder="请输入"></el-input>
+                                                        </el-form-item>
+                                                    </div>-->
+                                              </div>
+                                      
+                                      
                                       <div class="g_pad20b g_pad12t">
                                           <el-form-item :key="item.key" :prop="'projectList.' + index + '.field7692'">
                                             <el-radio-group v-model="item.field7692">
@@ -153,7 +184,7 @@ Write = {
                     <div class="select_title flex_center">
                         <div class="flex1 g_text_color">
                             <p class="g_h18">{{projectType[projectSelectIndex]}}</p>
-                            <p class="g_h14 g_pad8t g_text2_color" v-if="!isChangePro">按住ctrl键可多选项目</p>
+                            <p class="g_h14 g_pad8t g_text2_color" v-if="!isChangePro">按住ctrl键可多选项目,双击可直接选择该项目</p>
                         </div>
                         <el-input class="search_input" v-model="searchWord" placeholder="请输入项目名称/拼音/首字母"></el-input>
                         <div 
@@ -162,10 +193,47 @@ Write = {
                         @click="isBlocViewkModel=!isBlocViewkModel"></div>
                     </div>
                     <div class="flex1 g_scroll_y">
+                        <div v-if="projectSelectIndex==0">
+                            <div v-if="recentRecord.length" class="g_text2_color g_h14 g_scroll_width g_mar12b">最近使用</div>
+                            
+                            <div class="g_col_4_16 g_mar16b_s g_scroll_width" v-if="isBlocViewkModel">
+                                <div v-for="item in recentRecord" class="g_pad20 pro_list g_pointer g_radius4"
+                                :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
+                                @dblclick="db_projectSelect(item)"
+                                >
+                                    <div class="g_img g_radius4 g_wid60_ah block_center">
+                                        <img :src="item.img" alt="">
+                                    </div>
+                                    <p class="text_center g_pad20t desc">{{item.xmmk}}</p>
+    <!--                            {{item}}-->
+    <!--                            <p>负责人:{{item.}}</p>-->
+                                </div>
+                            </div>
+                            <div class="g_col_3_16 g_mar16b_s g_scroll_width" v-else>
+                                <div v-for="item in recentRecord.slice(0,3)" class="g_pad24 pro_list flex_center g_pointer g_radius4"
+                                :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
+                                @dblclick="db_projectSelect(item)"
+                                >
+                                    <div class="g_img g_radius4 g_wid50_ah">
+                                        <img :src="item.img" alt="">
+                                    </div>
+                                    <div class="flex1 g_pad12l">
+                                        <p class="bold">{{item.xmmk}}</p>
+                                        <div class="label g_pad8t">
+                                            <span class="purple" :title="'负责人<'+item.xm+'>'">{{item.xm}}</span>
+                                            <span class="blue" :title="'提报人<'+item.tbr+'>'">{{item.tbr}}</span>
+                                            <span :title="'所属分类<'+item.xmfl+'>'">{{item.xmfl}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="g_scroll_width  recent_line g_mar20b"></div>
+                        </div>
                         <loading v-if="projectListLoading"></loading>
                         <div class="g_col_4_16 g_mar16b_s g_scroll_width" v-if="isBlocViewkModel">
                             <div v-for="item in projectSelecData" class="g_pad20 pro_list g_pointer g_radius4"
                             :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
+                            @dblclick="db_projectSelect(item)"
                             >
                                 <div class="g_img g_radius4 g_wid60_ah block_center">
                                     <img :src="item.img" alt="">
@@ -178,6 +246,7 @@ Write = {
                         <div class="g_col_3_16 g_mar16b_s g_scroll_width" v-else>
                             <div v-for="item in projectSelecData" class="g_pad24 pro_list flex_center g_pointer g_radius4"
                             :class="{project_user_select:item.isSelect}" @click="projectSelect($event,item)"
+                            @dblclick="db_projectSelect(item)"
                             >
                                 <div class="g_img g_radius4 g_wid50_ah">
                                     <img :src="item.img" alt="">
@@ -235,7 +304,8 @@ Write = {
                     {required: true, message: '请输入工作内容', trigger: 'blur'}
                 ]
             },
-            submitFormLoaidng:false
+            submitFormLoaidng:false,
+            historyPro:[]
         };
     },
     computed: {
@@ -250,6 +320,10 @@ Write = {
                 return projectListFilter.filter(item=>item.xmmk.search(_RegExp)!==-1||item.easyName.search(_RegExp)!==-1||item.fullName.search(_RegExp)!==-1)
             }
             return projectListFilter
+        },
+        recentRecord() {
+            let historyPro=this.historyPro
+            return this.projectList.filter(item=>historyPro.indexOf(item.id)!==-1)
         }
     },
     watch: {
@@ -262,15 +336,15 @@ Write = {
         }
     },
     created() {
-
         if (this._isGetData) {
             console.log(this._userInfo)
             this.initFormData()
             this.getProject(()=>{
                 this.initFormData()
-
             })
         }
+        let cacheHistoryPro=cache('history_pro')
+        if(cacheHistoryPro) this.historyPro=cacheHistoryPro
     },
     methods: {
         getDate(){
@@ -490,7 +564,14 @@ Write = {
                     this.form.projectList.push(_data)
                 })
             }
-
+            let addHistoryData=data.filter(item=>{
+                return this.historyPro.indexOf(item.id)==-1
+            }).map(item=>item.id)
+            this.historyPro=[
+                ...addHistoryData,
+                ...this.historyPro,
+            ].splice(0,4)
+            cache('history_pro',JSON.stringify(this.historyPro))
             this.selectProject = false
             this.projectUserSelect = null
         },
@@ -517,6 +598,13 @@ Write = {
                 })
                 item.isSelect=true
             }
+        },
+        db_projectSelect(item){
+            this.projectList.map(pro=>{
+                pro.isSelect=false
+            })
+            item.isSelect=true
+            this.selectProjectNext()
         }
     }
 }
