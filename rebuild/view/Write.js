@@ -475,13 +475,9 @@ Write = {
                     loadFrom().then(_form=>{
                         param.signatureSecretKey=_form.params.signatureSecretKey
                         param.signatureAttributesStr=_form.params.signatureAttributesStr
-                        console.log({
-                            ...param,
-                            ..._form.submitParams
-                        })
                         write({
+                            ..._form.submitParams,
                             ...param,
-                            ..._form.submitParams
                         },'submitFormLoaidng',this).then(res=>{
                             if(res.data.type=='SUCCESS'){
                                 this.$message({

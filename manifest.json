@@ -1,7 +1,7 @@
 {
   // 必须的字段
   "name": "工作助手",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 2,
   "browser_action": {
     "default_icon": "icons/icon.png",
