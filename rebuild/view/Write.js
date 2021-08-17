@@ -475,10 +475,7 @@ Write = {
                     loadFrom().then(_form=>{
                         param.signatureSecretKey=_form.params.signatureSecretKey
                         param.signatureAttributesStr=_form.params.signatureAttributesStr
-                        write({
-                            ..._form.submitParams,
-                            ...param,
-                        },'submitFormLoaidng',this).then(res=>{
+                        write({...param,..._form.params},'submitFormLoaidng',this).then(res=>{
                             if(res.data.type=='SUCCESS'){
                                 this.$message({
                                     message: '提交成功',
