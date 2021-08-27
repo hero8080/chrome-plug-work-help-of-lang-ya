@@ -89,7 +89,8 @@ View = {
                 this.loading=false
                 this.tableData=listData.datas
                 let todayDate=this.getDate()
-                this.tableData.map(item=>{
+                let removeIndex=-1
+                this.tableData.map((item,index)=>{
                     for(key in item){
                         item[key]=this.clearHtmlTag(item[key])
                     }
@@ -97,12 +98,23 @@ View = {
                         let requestNameDate = item.requestname.match(/\d+/g).slice(-3)
                         if(requestNameDate&&requestNameDate.length>=3){
                             item.isTodayDate=requestNameDate.join('-')==todayDate
+                            if(item.isTodayDate){
+                                removeIndex=index
+                            }
                         }
                     }catch (e){
                         item.isTodayDate=false
                     }
-
                 })
+
+
+                console.log('removeIndex')
+                console.log(removeIndex)
+                if(removeIndex>0){
+                    let tempData=this.tableData[removeIndex]
+                    this.tableData[removeIndex]=this.tableData[0]
+                    this.tableData[0]=tempData
+                }
                 this.columns=listData.columns.filter(item=>item.display=='true'&&item.title!=='系统名称'&&item.title!=='未操作者')
             }).catch(error=>{
                 this.loading=false
