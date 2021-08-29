@@ -472,6 +472,7 @@ Write = {
                         "field7672":this._userInfo.deptid
                     }
                     // console.log(param)
+                    this.submitFormLoaidng=true
                     loadFrom().then(_form=>{
                         param.signatureSecretKey=_form.params.signatureSecretKey
                         param.signatureAttributesStr=_form.params.signatureAttributesStr
@@ -491,9 +492,9 @@ Write = {
                                     type: 'success'
                                 })
                             }
-                        }).catch(_=>{
-
                         })
+                    }).catch(_=>{
+                        this.submitFormLoaidng=false
                     })
 
                 } else {
