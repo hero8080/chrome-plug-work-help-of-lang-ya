@@ -37,3 +37,44 @@ const parentMenu = chrome.contextMenus.create({
 });
 
 chrome.contextMenus.onClicked.addListener(textTranslate);
+
+var timer=null
+let time=0
+//每半个小时循环一次
+//到5点25以后每分钟提醒一次
+
+setInterval(function (){
+    clearInterval(timer)
+    let currentData=new Date()
+    let comStartDate=new Date(currentData.getFullYear(),currentData.getMonth(),currentData.getDate(),17,10,0)
+    let comEndDate=new Date(currentData.getFullYear(),currentData.getMonth(),currentData.getDate(),17,30,0)
+    //是否到时间了
+    let isTimeLoad=
+        currentData.getTime()-comStartDate.getTime()>0
+        &&
+        comEndDate.getTime()-currentData.getTime()>0
+
+    if(!time&&isTimeLoad){
+        postMsg()
+        time++
+        setInterval(function (){
+            if(time>5){
+                clearInterval(timer)
+                time=0
+                return
+            }
+            postMsg()
+            time++
+        },1000*60*2)
+    }
+},1000*60*10)
+// },1000)
+
+function postMsg(){
+    chrome.notifications.create(parseInt(1000+Math.random()*8888)+'',{
+        type:'basic',
+        iconUrl:chrome.runtime.getURL("pro_icon/92.png"),
+        title : "写日志提醒",
+        message: new Date().toLocaleString(),
+    })
+}

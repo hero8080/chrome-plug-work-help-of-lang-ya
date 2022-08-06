@@ -12,6 +12,7 @@
   "permissions": [
     "contextMenus",
     "tabs",
+    "notifications",
     "activeTab",
     "notifications",
     "background",
@@ -106,6 +107,7 @@
     "pro_icon/96.png",
     "pro_icon/97.png",
     "pro_icon/98.png",
-    "pro_icon/99.png"
+    "pro_icon/99.png",
+    "pro_icon/100.png"
   ]
 }

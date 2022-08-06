@@ -2,7 +2,7 @@ Write = {
     template: `
         <div class="flex1 flex_column write">
             <div class="empty_height"></div>
-            <div class="empty_content_bottom g_pad40t g_pad12b g_h24 g_pad60l bold">写日志</div> 
+            <div class="empty_content_bottom g_pad40t g_pad12b g_h24 g_pad60l bold" @click="postMsg">写日志</div> 
             <!--表单-->
             <div class="middle" ref="middle">
                 <div class="g_pad20tb content">
@@ -417,6 +417,7 @@ Write = {
             getListData()
         },
         submitForm() {
+            console.log('submitForm')
             this.$refs.form.validate((valid) => {
                 if (valid) {
                     let projectList=[...this.form.projectList]
@@ -451,7 +452,7 @@ Write = {
                             let _key=''
                             if(key.search(/_name/ig)!==-1){
                                 //有name
-                                _key=key.replace(/_name/i,'_'+index+'nmae')
+                                _key=key.replace(/_name/i,'_'+index+'name')
                             }else{
                                 //无name
                                 _key=key+'_'+index
@@ -476,6 +477,7 @@ Write = {
                     loadFrom().then(_form=>{
                         param.signatureSecretKey=_form.params.signatureSecretKey
                         param.signatureAttributesStr=_form.params.signatureAttributesStr
+                        console.log(JSON.stringify({...param,..._form.params}))
                         write({...param,..._form.params},'submitFormLoaidng',this).then(res=>{
                             if(res.data.type=='SUCCESS'){
                                 this.$message({
@@ -607,6 +609,9 @@ Write = {
             })
             item.isSelect=true
             this.selectProjectNext()
-        }
+        },
+        postMsg() {
+            console.log('postMsg')
+        },
     }
 }
